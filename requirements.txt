@@ -1,0 +1,7 @@
+
+docker pull nats
+
+
+Sensors:
+pip install nats-python
+pip install opencv-contrib-python
