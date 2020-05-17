@@ -14,18 +14,21 @@ class Logic:
 
     async def run(self, loop, args):
         sensor = self.getSensor(args)
-        communicator = self.getCommunicator(args)
+        #communicator
+        communciator = NATSCommunication.NATSCommunication()
+        communciator.logic = self
+        await communciator.connect(args["NATSaddress"])
 
         self.lastFrame = sensor.getFrame()
-
-        while(self.lastFrame != None):
-            await communicator.sendMessage(self.lastFrame,self.coordinateN,self.coordinateE)
-            await asyncio.sleep(1000/self.frameRate)
-
-
+        while not (self.lastFrame is None):
+            await communciator.sendMessage(self.lastFrame,self.coordinateN,self.coordinateE)
+            await asyncio.sleep(1)
+            self.lastFrame = sensor.getFrame()
 
 
-    def getCommunicator(self, args):
+
+
+    async def getCommunicator(self, args):
         communciator = NATSCommunication.NATSCommunication()
         communciator.logic = self
         await communciator.connect(args["NATSaddress"])

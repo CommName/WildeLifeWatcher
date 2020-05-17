@@ -4,8 +4,7 @@ from nats.aio.client import Client as NATS
 import cv2
 from CommunicationLayer import Communicator
 
-class NATSCommunication (Communicator):
-
+class NATSCommunication (Communicator.Communicator):
     nc = None
     sid = None
     sendTopicName = "WildLife.Sensors.Data"
@@ -24,7 +23,7 @@ class NATSCommunication (Communicator):
         self.sid = await self.nc.subscribe(self.recvTopicRequest, cb=self.recvMessage)
 
     async def sendMessage(self, image, gpsNCoordinate, gpsYCoordinate):
-        jsonData = super().encodeMessageJSON()
+        jsonData = super().encodeMessageJSON(image, gpsNCoordinate, gpsYCoordinate)
         await self.nc.publish(self.sendTopicName, jsonData.encode())
 
 
@@ -32,8 +31,11 @@ class NATSCommunication (Communicator):
         subject = msg.subject
         reply = msg.reply
         data = json.loads(msg.data.decode())
-        
-        #await self.nc.publish(reply, b'I can help')
+        Get = 'get' in data
+        if Get:
+            if data["get"] == "frame":
+                jsonData = super().encodeMessageJSON(self.logic.lastFrame,self.logic.coordinateN,self.logic.coordinateE)
+                await self.nc.publish(reply, b'I can help')
 
 
 
