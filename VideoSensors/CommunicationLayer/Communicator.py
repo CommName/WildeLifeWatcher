@@ -6,6 +6,8 @@ import numpy as np
 
 class Communicator(ABC):
 
+
+
     @abstractmethod
     async def sendMessage(self, image, gpsNCoordinate, gpsYCoordinate):
         pass

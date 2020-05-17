@@ -10,6 +10,7 @@ class NATSCommunication (Communicator):
     sid = None
     sendTopicName = "WildLife.Sensors.Data"
     recvTopicRequest = "WildLife.Sensors.API"
+    logic = None
 
     async def addHandler(self, obj, command, arguments):
         return obj
@@ -17,9 +18,9 @@ class NATSCommunication (Communicator):
     async def closeConnection(self):
         await self.nc.close()
 
-    async def connect(self, address=""):
+    async def connect(self, address="nats://localhost:4222"):
         self.nc = NATS()
-        await self.nc.connect()
+        await self.nc.connect(address)
         self.sid = await self.nc.subscribe(self.recvTopicRequest, cb=self.recvMessage)
 
     async def sendMessage(self, image, gpsNCoordinate, gpsYCoordinate):
@@ -31,6 +32,7 @@ class NATSCommunication (Communicator):
         subject = msg.subject
         reply = msg.reply
         data = json.loads(msg.data.decode())
+        
         #await self.nc.publish(reply, b'I can help')
 
 
