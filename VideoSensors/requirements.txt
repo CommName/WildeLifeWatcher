@@ -1,0 +1,4 @@
+wheel
+nats-python
+asyncio-nats-client
+opencv-contrib-python

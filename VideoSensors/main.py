@@ -1,7 +1,7 @@
 from CommunicationLayer import NATSCommunication
-import cv2
 import asyncio
 import argparse
+import os
 
 from Sensors import CSVSensor
 
@@ -12,49 +12,42 @@ class Logic:
     coordinateE = 0
     frameRate = 1
 
-    async def run(self, loop, args):
-        sensor = self.getSensor(args)
+    async def run(self, loop):
+        sensor = self.getSensor()
         #communicator
         communciator = NATSCommunication.NATSCommunication()
         communciator.logic = self
-        await communciator.connect(args["NATSaddress"])
+        await communciator.connect(os.getenv("NATSaddress"))
 
         self.lastFrame = sensor.getFrame()
         while not (self.lastFrame is None):
             await communciator.sendMessage(self.lastFrame,self.coordinateN,self.coordinateE)
-            await asyncio.sleep(1)
+
+            await asyncio.sleep(1//self.frameRate)
             self.lastFrame = sensor.getFrame()
 
 
 
 
-    async def getCommunicator(self, args):
+    async def getCommunicator(self):
         communciator = NATSCommunication.NATSCommunication()
         communciator.logic = self
-        await communciator.connect(args["NATSaddress"])
+        await communciator.connect(os.getenv("NATSaddress"))
         return communciator
 
-    def getSensor(self, args):
+    def getSensor(self):
         sensor = CSVSensor.CSVSensor();
-        sensor.loadCVSFile(args["CSVFile"])
+        sensor.loadCVSFile(os.getenv("CSVFile"))
         return sensor
 
 
 #Main program
-ap = argparse.ArgumentParser()
-ap.add_argument("-NATS", "--NATSaddress", required=False,default="nats://localhost:4222", help="Address to NATS server")
-ap.add_argument("-csv", "--CSVFile", required=True, help="CSV File with urls to images that will be displayed")
-ap.add_argument("-fps", "--FramesPerSecond", required=False, default=1, help="Number of frames per second that are sendt throught network")
-ap.add_argument("-N", "--NorthCoordiante", required=True, help="Noorth gps coordinate of sensor")
-ap.add_argument("-E", "--EastCoordinate", required=True, help="East gps coordinate of sensor")
-args = vars(ap.parse_args())
-
 logic = Logic()
-
-logic.coordinateE = args["EastCoordinate"]
-logic.coordinateN = args["NorthCoordiante"]
-logic.frameRate = args["FramesPerSecond"]
+print(os.environ)
+logic.coordinateE = float(os.getenv("EastCoordinate"))
+logic.coordinateN = float(os.getenv("NorthCoordiante"))
+logic.frameRate = int(os.getenv("FramesPerSecond"))
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(logic.run(loop, args))
+loop.run_until_complete(logic.run(loop))
 loop.close()

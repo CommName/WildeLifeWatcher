@@ -1,0 +1,23 @@
+#Offical python runtime
+FROM python:3.8
+
+#Copy the current directory contents into the containter at /app
+ADD . /app
+COPY requirements.txt /tmp/
+
+#Install any needed packaged specifed in .\requirements.txt
+RUN pip install --trusted-host pypip.python.org  -r /tmp/requirements.txt
+
+#Ports
+
+#Environemnt variable
+ENV EastCoordinate=44.0
+ENV NorthCoordiante=44.0
+ENV FramesPerSecond=1
+ENV NATSaddress=nats://demo.nats.io:4222
+ENV CSVFile=/app/dataset.csv
+
+
+#Run app when the container launches
+
+CMD ["python", "/app/main.py"]
