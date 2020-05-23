@@ -12,4 +12,7 @@ class Storage(ABC):
     def getImageNames(self, coordinateN, coordinateE):
         pass
 
+    def getImages(self, coordinateN, coordinateE, startTime, endTime):
+        pass
+
 

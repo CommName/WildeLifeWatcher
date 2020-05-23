@@ -1,16 +1,15 @@
-import asyncio
-from nats.aio.client import Client as NATS
 import cv2
-import json
-import base64
-import numpy as np
 from StorageSystem import MongoStorage
 from datetime import datetime
 import asyncio
 import os.path
 from pathlib import Path
 from CommunicationLayer import NATSCommunication
+from API import DataBaseAPI
+from API import ImageAPI
 
+import cherrypy
+import threading
 
 class DataServiceLogic:
 
@@ -35,7 +34,7 @@ class DataServiceLogic:
         imageId = self.storage.insertImage(time,coordinateN, coordinateE)
 
         #Save iamge
-        URI = "./images/"+str(coordinateN)+"/"+str(coordinateE)+"/"
+        URI = "./images/"
         filepath = Path(URI)
         filepath.mkdir(parents=True,exist_ok=True)
         URI += str(imageId)+".jpg"
@@ -54,13 +53,35 @@ class DataServiceLogic:
             await asyncio.sleep(1)
 
 
+def asyncoThreading(loop, logic):
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(logic.run(loop))
 
-
+#Main
 logic = DataServiceLogic()
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(logic.run(loop))
-loop.close()
+sensorThread = threading.Thread(target=asyncoThreading, args=(loop,logic,))
+sensorThread.start()
 
+dbGateway = DataBaseAPI.DataBaseAPI(logic)
+imgGateway = ImageAPI.ImageAPI(logic)
+conf = {
+    '/': {
+        'request.dispatch' : cherrypy.dispatch.MethodDispatcher(),
+        'tools.response_headers.on' : True,
+        'tools.response_headers.headers' : [('Content-Type', 'text/plain')],
+    }
+}
 
+cherrypy.tree.mount(dbGateway, "/data", conf)
+cherrypy.tree.mount(imgGateway, "/image", conf)
 
+if hasattr(cherrypy.engine, 'block'):
+    # 3.1 syntax
+    cherrypy.engine.start()
+    cherrypy.engine.block()
+else:
+    # 3.0 syntax
+    cherrypy.server.quickstart()
+    cherrypy.engine.start()

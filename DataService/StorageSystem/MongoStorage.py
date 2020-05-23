@@ -1,6 +1,5 @@
 from StorageSystem import Storage
 from pymongo import MongoClient
-
 class MongoStorage(Storage.Storage):
 
     client = None
@@ -25,3 +24,14 @@ class MongoStorage(Storage.Storage):
     def getImageNames(self, coordinateN, coordinateE):
         images = self.table.find({'coordinateN' : coordinateN, 'coordinateE': coordinateE})
         return images
+
+    def getImages(self, coordinateN, coordinateE, startTime, endTime):
+        query = {
+            'coordinateN' : 40.0,
+            'coordinateE' : 40.0,
+            'time' : {'$gte': startTime, '$lt': endTime}
+        }
+        print(query)
+        results =  self.table.find(query).limit(100)
+
+        return results
