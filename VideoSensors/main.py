@@ -59,11 +59,14 @@ sensorThread = threading.Thread(target=asyncoThreading, args=(loop,logic,))
 sensorThread.start()
 
 API = APIGateway.Gateway(logic)
+cherrypy.config.update({'server.socket_port': 8081})
+
 conf = {
     '/': {
         'request.dispatch' : cherrypy.dispatch.MethodDispatcher(),
         'tools.response_headers.on' : True,
         'tools.response_headers.headers' : [('Content-Type', 'text/plain')],
+        'server.socket_port' : 8099
     }
 }
 

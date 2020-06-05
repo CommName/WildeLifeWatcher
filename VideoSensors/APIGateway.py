@@ -7,7 +7,7 @@ import asyncio
 @cherrypy.expose
 class Gateway(object):
 
-    Logic = None;
+    Logic = None
 
     def __init__(self, logic):
         print('construct')
@@ -24,5 +24,5 @@ class Gateway(object):
         self.Logic.coordinateE = coordinateE
         self.Logic.coordinateN = coordinateN
         self.Logic.lastFrame = img
-        await self.Logic.communciator.sendMessage(img,coordinateN,coordinateE)
+        #await self.Logic.communciator.sendMessage(img,coordinateN,coordinateE)
         return

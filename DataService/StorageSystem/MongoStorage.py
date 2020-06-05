@@ -19,6 +19,7 @@ class MongoStorage(Storage.Storage):
             'coordinateE' : coordinateE
         }
         result = self.table.insert_one(image_data)
+        print(result)
         return result.inserted_id
 
     def getImageNames(self, coordinateN, coordinateE):

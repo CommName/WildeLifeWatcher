@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <title>WildeLife watcher</title>
+
+        <script type="application/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+        <script type="application/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+    <h1>Live camera</h1>
+
+    <div class="menu">
+
+        <a class="menuButton" href="../Home"> Home</a>
+        <a class="menuButton" href="../Live"> Live Broadcast</a>
+        <a class="menuButton" href="../Gallery"> Gallery</a>
+
+    </div>
+
+    <div class="livestreamBody">
+        <div class="sensorSpec">
+
+            <!-- Select a sensor drop down box-->
+            <label for="sensors"> Choose a sensor: </label>
+            <select name="sensors" class="sensorSelector">
+                <option value="first"> first </option>
+                <option value="first"> first </option>
+                <option value="first"> first </option>
+            </select>
+            
+            <p>
+              Ovo su neki detalji o senzoru: <br />
+              Kordinate:<br />
+                N: 40.0<br />`
+                E: 40.0<br />
+                FrameRate: 1<br />
+                ...
+            </p>
+
+        </div>
+
+        <img id="sensorImage" class="sensorImage" src="https://www.w3schools.com/html/pic_trulli.jpg" alt="Test" >
+    </div>
+
+    <input type="hidden" id="serverAddress" name="serverAddress" value="%(ws_addr)s">
+    <script src="..\scripts\live.js"> </script>
+
+    </body>
+</html>

@@ -1,0 +1,65 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color:rgb(255,153,0)
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgb(219,132,0);
+    border-radius: 9px; ; 
+}
+
+
+.menuButton {
+color: rgb(255, 203, 47); font-size: 14px; line-height: 14px; padding: 8px; border-radius: 12px; font-family: Georgia, serif; font-weight: normal; text-decoration: none; font-style: normal; font-variant: normal; text-transform: none; background-image: linear-gradient(to right, rgb(164, 90, 25) 0%, rgb(203, 117, 31) 51%, rgb(164, 90, 25) 100%); box-shadow: rgba(0, 0, 0, 0.3) -1px 5px 20px 0px; border: 2px solid rgb(104, 59, 23); display: inline-block;}
+.menuButton:hover {
+background: #A45A19; }
+.menuButton:active {
+background: #A45A19; }
+
+
+.post {
+    display: flex;
+    flex-direction:  row;
+    justify-content: left;
+    border: 3px solid rgba(104,59,23,0.47);
+    padding: 5px;
+    margin: 10px;
+}
+
+.postImage {
+    flex-grow: 1;
+    max-width: 100px;
+    max-height: 100px;
+    margin: 5px;
+}
+
+.postText {
+    flex-grow: 2;
+    margin: 5px;
+}
+
+.livestreamBody{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+
+}
+
+.sensorImage{
+    flex-grow: 2;
+    margin: 10px;
+}
+
+.sensorSpec {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 10px;
+}
+

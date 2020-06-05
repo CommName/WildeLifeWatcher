@@ -2,14 +2,36 @@ import cherrypy
 from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
 from ws4py.websocket import WebSocket
 from ws4py.messaging import TextMessage
+from NotificationRegistry import NotificationRegistry
 
 class WebSocketHandler(WebSocket):
+
+    subscribedSensors = []
+
+
     def opened(self):
-        self.send(TextMessage('Welcome'))
+        NotificationRegistry.NotificationRegistry.Instance().subscribeForSensor(40.0, 40.0,self)
 
     def received_message(self, m):
-        cherrypy.engine.publish('websocket-broadcast', m)
-        self.send(TextMessage("pong"), False)
+        #TODO subscribe for diffrent things
 
-    def closed(self, code, reason="A client left the room without a proper explanation."):
-        cherrypy.engine.publish('websocket-broadcast', TextMessage(reason))
+        #sensor N E
+
+        #unsub sensor N E
+
+        #animal animalName
+
+        #unsub animal animalName
+
+        return
+
+
+    def closed(self):
+        for sensor in self.subscribedSensors:
+            sensor.unsubsribe(self)
+
+    def unsubcribeSensor(self, senosr):
+        self.subscribedSensors.remove(senosr)
+
+    def subscribeSensor(self, sensor):
+        self.subscribedSensors.append(sensor)

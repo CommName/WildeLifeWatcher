@@ -1,7 +1,12 @@
 
 docker pull nats
+docker run -p 4222:4222 -ti nats:latest
 
 
 Sensors:
+pip install wheel
+
 pip install nats-python
+pip install asyncio-nats-client
+
 pip install opencv-contrib-python

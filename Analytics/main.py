@@ -72,6 +72,16 @@ sensorThread = threading.Thread(target=asyncoThreading, args=(loop,logic,args,))
 sensorThread.start()
 
 #Consul
+c = consul.Consul()
+c.agent.service.register('analytics', service_id='analytics', port=args["port"])
+consul_resolver = resolver.Resolver()
+consul_resolver.port = 8600
+consul_resolver.nameservers = ["127.0.0.1"]
+
+import urllib.request
+
+answer = urllib.request.urlopen("http://localhost:8500/v1/catalog/service/analytics").read()
+print(answer)
 
 #chery pie api
 dbGateway = DBapi.ImageAPI(logic)
