@@ -16,5 +16,4 @@ class NATSCommunication (Communicator.Communicator):
 
     async def sendMessage(self, msg):
         await self.nc.publish(self.notifyTopic, msg.encode('ascii'))
-        await self.nc.flush()
         return
