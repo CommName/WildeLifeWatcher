@@ -44,12 +44,11 @@ class Registry(object):
                     if (datetime.now() - service.time).total_seconds() > 10:
                         deleteServices.append(service)
 
+                print(deleteServices)
                 for service in deleteServices:
-                    self.services[key].remove(service)
-                    loop = asyncio.new_event_loop()
-                    asyncio.set_event_loop(loop)
-                    loop.run_until_complete(self.communicator.sendMessage("Removed service " + service.serviceName))
+                    self.unregistryService(service.serviceName,service.serviceAddress,service.serviceport,service.serviceName)
 
+            print("did something")
             sleep(10)
 
 
@@ -73,12 +72,12 @@ class Registry(object):
 
 
     def unregistryService(self, serviceName, serviceAddress, servicePort, serverName):
-        if not serverName in self.services.keys():
-            self.registryServices[serviceName] = []
+        if not serviceName in self.services.keys():
+            return
 
         found = None
         for service in self.services[serviceName]:
-            if service.serviceName == serviceName and service.serviceAddress == serverName:
+            if service.serviceName == serviceName and service.serviceAddress == serviceAddress:
                 found = service
                 break
 
