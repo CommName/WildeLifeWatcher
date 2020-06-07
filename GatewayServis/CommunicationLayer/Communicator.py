@@ -24,5 +24,5 @@ class Communicator(ABC):
         jpg_original = base64.b64decode(imageAsString)
         jpg_as_np = np.frombuffer(jpg_original,dtype=np.uint8)
         img = cv2.imdecode(jpg_as_np,flags=1)
-        return img, jsonData["CoordinateN"], jsonData["CoordinateE"]
+        return img, jsonData["CoordinateN"], jsonData["CoordinateE"], jsonData["Name"]
 

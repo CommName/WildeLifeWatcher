@@ -4,14 +4,12 @@ import json
 
 class SensorNotify:
 
-    N = 0
-    E = 0
+    sensorName = ""
     subscribers = []
 
-    def __init__(self, cordN, cordE):
-        self.N = cordN
-        self.E = cordE
+    def __init__(self,sensorName):
         self.subscribers = []
+        self.sensorName = sensorName
 
     def __del__(self):
         jsonData = json.dumps({ "Type" : "Sensor down"})
@@ -23,11 +21,13 @@ class SensorNotify:
         self.subscribers.append(socket)
 
     def unsubsribe(self, socket):
-        self.subscribers.remove(socket)
+        if socket in self.subscribers:
+            self.subscribers.remove(socket)
 
     def notify(self, image):
+        print(self.sensorName, self.subscribers)
         _, imdata = cv2.imencode('.JPG', image)
         imageAsString = base64.b64encode(imdata).decode()
-        jsonData = json.dumps({"Type": "New sesnor image", "coordinateN" : self.N, "coordinateE" : self.E, "image": imageAsString})
+        jsonData = json.dumps({"Type": "New sesnor image", "name" : self.sensorName, "image": imageAsString})
         for socket in self.subscribers:
             socket.send(jsonData.encode())

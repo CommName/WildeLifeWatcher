@@ -3,7 +3,7 @@ import cv2
 import json
 import base64
 from NotificationRegistry import SensorNotify
-
+from NotificationRegistry import ServicesRegistryCache
 class Singleton:
 
     def __init__(self, cls):
@@ -29,17 +29,19 @@ class NotificationRegistry(object):
     sensorSubscription = None
     sensorLock = None
     activeSensors = None
+    serviceRegistry = None
 
 
     def __init__(self):
         self.animalSubscription = { }
-        self.activeSensors = []
+        self.activeSensors = { }
         self.numberOfSensors = 0
         self.sensorLock = threading.Lock()
 
         with open('./RawData/animalList.txt') as fp:
             for line in fp:
                 self.animalSubscription[line] = []
+        self.serviceRegistry =  ServicesRegistryCache.ServiceRegistryCache(self)
 
 
     def subscribeForAnimal(self, animalName, socket):
@@ -50,49 +52,39 @@ class NotificationRegistry(object):
         if animalName in self.animalSubscription.keys():
             self.animalSubscription[animalName].remove(socket)
 
-    def subscribeForSensor(self, N, E, socket):
-        for sensor in self.activeSensors:
-            if sensor.N == N and sensor.E == E:
-                sensor.subscribe(socket)
-                socket.subscribeSensor(sensor)
-                return
+    def subscribeForSensor(self, serverName, socket):
+        print(serverName)
+        if serverName in  self.activeSensors:
+            self.activeSensors[serverName].subscribe(socket)
+            socket.subscribeSensor(self.activeSensors[serverName])
 
-    def unsubscribeFromSensor(self, sensorId, socket):
-        if sensorId < len(self.sensorSubscription):
-            self.sensorSubscription[sensorId].remove(socket)
+    def unsubscribeFromSensor(self, serverName, socket):
+        if serverName in self.activeSensors:
+            self.activeSensors[serverName].unsubsribe(socket)
 
-    def addSensor(self, sensorN, sensorE):
+    def addSensor(self, serverName):
 
         self.sensorLock.acquire()
-        for sensor in self.activeSensors:
-            if sensorN == sensor.N and sensorE == sensor.E:
-                self.sensorLock.release()
-                return
+        if serverName in self.activeSensors:
+            self.sensorLock.release()
+            return
 
-        newsensor = SensorNotify.SensorNotify(sensorN, sensorE)
-        self.activeSensors.append(newsensor)
+        newsensor = SensorNotify.SensorNotify(serverName)
+        self.activeSensors[serverName] = newsensor
 
         self.sensorLock.release()
 
-    def removeSensor(self, sensorN, sensorE):
+    def removeSensor(self, serverName):
         self.sensorLock.acquire()
-        found = False
-        foundSensor = None
-        for sensor in self.activeSensors:
-            if sensor.N == sensorN and sensor.E == sensorE:
-                found = True
-                foundSensor = sensor
-                break
 
-        if found:
-            self.activeSensors.remove(foundSensor)
+        if serverName in self.activeSensors:
+            self.activeSensors.pop(serverName)
 
         self.sensorLock.release()
 
 
-    def notifySensor(self, image, sensorN, sensorE):
-        for sensor in self.activeSensors:
-            if sensor.N == sensorN and sensor.E == sensorE:
-                sensor.notify(image)
-                return
+    def notifySensor(self, image, sensorName):
+        if sensorName in self.activeSensors:
+            self.activeSensors[sensorName].notify(image)
+
 

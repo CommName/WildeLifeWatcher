@@ -10,6 +10,7 @@ from CommunicationLayer import comm
 import argparse
 import asyncio
 import threading
+from API import SensorAPI
 
 async def communicatorLayer(args):
     communicator = await comm.getCommunciator(args, None)
@@ -22,7 +23,7 @@ def communicationThread(loop, args):
 
 
 #TODO Drugacije implementirati ovaj deo
-NotificationRegistry.NotificationRegistry.Instance().addSensor(40.0,40.0)
+NotificationRegistry.NotificationRegistry.Instance().addSensor("Sensor1")
 
 
 ag = argparse.ArgumentParser()
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     #Cherry configuration
     WebSocketPlugin(cherrypy.engine).subscribe()
     cherrypy.tools.websocket = WebSocketTool()
+    cherrypy.config.update({'server.socket_host': '0.0.0.0'})
 
     #Cherrypy API config
     web_conf = {
@@ -70,15 +72,26 @@ if __name__ == "__main__":
         }
     }
 
+    sensor_conf = {
+        '/': {
+            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+            'tools.sessions.on': True,
+            'tools.response_headers.on': True,
+            'tools.response_headers.headers': [('Content-Type', 'text/plain')]
+        }
+    }
+
 
 
     #Creating API objects
     web = WebDashboard.WebDashboard()
     imgAPI = ImageAPI.ImageAPI()
+    sensorAPI = SensorAPI.SensorAPI()
 
     #Mounting objects
     cherrypy.tree.mount(web, '/', web_conf)
     cherrypy.tree.mount(imgAPI,'/images')
+    cherrypy.tree.mount(sensorAPI, '/sensors', sensor_conf)
 
     #Starting
     cherrypy.engine.start()

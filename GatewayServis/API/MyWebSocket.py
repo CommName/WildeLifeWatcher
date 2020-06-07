@@ -10,25 +10,39 @@ class WebSocketHandler(WebSocket):
 
 
     def opened(self):
-        NotificationRegistry.NotificationRegistry.Instance().subscribeForSensor(40.0, 40.0,self)
+        return
 
     def received_message(self, m):
-        #TODO subscribe for diffrent things
+        comand = str(m).split(' ')
 
-        #sensor N E
+        #sensor sensorName
+        if(comand[0] == "sensor"):
+            for sensor in self.subscribedSensors:
+                print(sensor)
+                NotificationRegistry.NotificationRegistry.Instance().unsubscribeFromSensor(sensor.sensorName,self)
+                self.subscribedSensors.remove(sensor)
+            NotificationRegistry.NotificationRegistry.Instance().subscribeForSensor(comand[1], self)
 
-        #unsub sensor N E
+        #unsub sensor sensorName
+        elif(comand[0] == "unsub" and comand[1] == "sensor"):
+            NotificationRegistry.NotificationRegistry.Instance().unsubscribeFromSensor(comand[2])
 
         #animal animalName
+        elif(comand[0] == "animal"):
+            NotificationRegistry.NotificationRegistry.Instance().subscribeForAnimal(comand[1])
 
         #unsub animal animalName
+        elif(comand[0] == "unsub" and comand[1] == "animal"):
+            NotificationRegistry.NotificationRegistry.Instance().unsubscribeFromAnimal(comand[2])
 
         return
 
 
-    def closed(self):
+    def closed(self, code, reason):
         for sensor in self.subscribedSensors:
             sensor.unsubsribe(self)
+
+
 
     def unsubcribeSensor(self, senosr):
         self.subscribedSensors.remove(senosr)

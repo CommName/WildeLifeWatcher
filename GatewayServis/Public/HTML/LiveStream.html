@@ -27,27 +27,20 @@
 
             <!-- Select a sensor drop down box-->
             <label for="sensors"> Choose a sensor: </label>
-            <select name="sensors" class="sensorSelector">
-                <option value="first"> first </option>
-                <option value="first"> first </option>
-                <option value="first"> first </option>
+            <select id= "sensorSelector" name="sensors" class="sensorSelector">
             </select>
             
-            <p>
-              Ovo su neki detalji o senzoru: <br />
-              Kordinate:<br />
-                N: 40.0<br />`
-                E: 40.0<br />
-                FrameRate: 1<br />
+            <p id =  "sensorInfo">
                 ...
             </p>
 
         </div>
 
-        <img id="sensorImage" class="sensorImage" src="https://www.w3schools.com/html/pic_trulli.jpg" alt="Test" >
+        <img id="sensorImage" class="sensorImage" src="https://cdn2.vectorstock.com/i/1000x1000/02/96/tv-no-signal-vector-4340296.jpg" alt="Test" >
     </div>
 
     <input type="hidden" id="serverAddress" name="serverAddress" value="%(ws_addr)s">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
     <script src="..\scripts\live.js"> </script>
 
     </body>

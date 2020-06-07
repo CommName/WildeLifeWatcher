@@ -9,8 +9,8 @@ class WebDashboard:
 
     ws_addr = None
 
-    def __init__(self, address="localhost:8080"):
-        self.ws_addr = 'ws://' + address + '/ws'
+    def __init__(self, address="127.0.0.1:8080"):
+        self.ws_addr =  address
 
         cur_dir = os.path.normpath(os.path.abspath(os.path.dirname(__file__)))
         index_path = "./Public/HTML/index.html"
@@ -29,11 +29,11 @@ class WebDashboard:
 
     @cherrypy.expose
     def Live(self):
-        return self.liveStreamPage % {'ws_addr': 'ws://localhost:8080/ws'}
+        return self.liveStreamPage % {'ws_addr': self.ws_addr}
 
     @cherrypy.expose
     def Gallery(self):
-        return self.indexPage % {'username': "User123" , 'ws_addr': 'ws://localhost:8080/ws'}
+        return self.indexPage % {'username': "User123" , 'ws_addr': self.ws_addr}
 
     @cherrypy.expose
     def ws(self):
