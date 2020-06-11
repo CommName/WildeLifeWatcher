@@ -14,9 +14,9 @@ class MongoStorage(Storage.Storage):
 
     def insertImage(self, time, coordinateN, coordinateE):
         image_data = {
-            'time' : time,
-            'coordinateN' : coordinateN,
-            'coordinateE' : coordinateE
+            'time': time,
+            'coordinateN': coordinateN,
+            'coordinateE': coordinateE
         }
         result = self.table.insert_one(image_data)
         print(result)
@@ -28,11 +28,15 @@ class MongoStorage(Storage.Storage):
 
     def getImages(self, coordinateN, coordinateE, startTime, endTime):
         query = {
-            'coordinateN' : 40.0,
-            'coordinateE' : 40.0,
-            'time' : {'$gte': startTime, '$lt': endTime}
+            "time" : { "$gt" : startTime, "$lt" : endTime}
         }
+
+        if not coordinateN is None:
+            query["coordinateN"] = coordinateN
+        if not coordinateE is None:
+            query["coordinateE"] : coordinateE
+
         print(query)
-        results =  self.table.find(query).limit(100)
+        results =  self.table.find(query).sort("time", -1)
 
         return results

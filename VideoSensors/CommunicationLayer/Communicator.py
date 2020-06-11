@@ -12,18 +12,12 @@ class Communicator(ABC):
     async def sendMessage(self, image, gpsNCoordinate, gpsYCoordinate):
         pass
 
-    @abstractmethod
-    async def recvMessage(self, msg):
-        pass
 
-    @abstractmethod
-    async def addHandler(self, obj, command, arguments):
-        pass
 
-    def encodeMessageJSON(self, image, gpsNCoordinate, gpsYCoordinate):
+    def encodeMessageJSON(self, image, gpsNCoordinate, gpsYCoordinate, Name):
         _, imdata = cv2.imencode('.JPG', image)
         imageAsString = base64.b64encode(imdata).decode()
-        jsonData = json.dumps({"CoordinateN": gpsNCoordinate, "CoordinateE": gpsYCoordinate, "image": imageAsString})
+        jsonData = json.dumps({"CoordinateN": gpsNCoordinate, "CoordinateE": gpsYCoordinate, "image": imageAsString, "Name" : Name})
         return jsonData
 
     def decodeMessageJSON(selfs, jsonData):

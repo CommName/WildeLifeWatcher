@@ -15,7 +15,7 @@ class Gateway(object):
 
     @cherrypy.tools.accept(media = "text/plain")
     def GET(self):
-        return self.Logic.communciator.encodeMessageJSON(self.Logic.lastFrame, self.Logic.coordinateN, self.Logic.coordinateE)
+        return self.Logic.communciator.encodeMessageJSON(self.Logic.lastFrame, self.Logic.coordinateN, self.Logic.coordinateE, self.Logic.Name)
 
     def POST(self, coordinateN, coordinateE, image):
         jpg_original = base64.b64decode(image)

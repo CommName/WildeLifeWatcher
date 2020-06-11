@@ -1,66 +1,61 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-      <style>
-        body { padding-top: 20px; background-color: #333; color: #fff; }
-        #chat { width: 100%%; height: 300px;  color: #333; }
-      </style>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <title>WildeLife watcher</title>
 
-      <script type="application/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-      <script type="application/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-      <script type="application/javascript">
-        $(document).ready(function() {
-          var ws = new WebSocket("%(ws_addr)s");
-
-          window.onbeforeunload = function(e) {
-            $("#chat").val($("#chat").val() + "Bye bye...\n");
-            ws.close(1000, "%(username)s left the room");
-
-            if(!e) e = window.event;
-            e.stopPropagation();
-            e.preventDefault();
-          };
-          ws.onmessage = function (evt) {
-             $("#chat").val($("#chat").val() + evt.data + "\n");
-          };
-          ws.onopen = function() {
-             ws.send("%(username)s entered the room");
-          };
-          ws.onclose = function(evt) {
-             $("#chat").val($("#chat").val() + "Connection closed by server: " + evt.code + " \'" + evt.reason + "\'\n");
-          };
-
-          $("#send").click(function() {
-             console.log($("#message").val());
-             ws.send("%(username)s: " + $("#message").val());
-             $("#message").val("");
-             return false;
-          });
-        });
-      </script>
+        <script type="application/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+        <script type="application/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-      <div class="container">
-        <div class="row">
-	  <textarea id="chat" readonly="readonly"></textarea>
-	</div>
 
-        <div class="row">
-	<form action="#" id="chatform" method="get" class="form-horizontal" role="form">
-          <div class="form-group">
-	    <div class="col-sm-4">
-	      <input class="form-control input-sm" type="text" id="message" />
-	    </div>
-	    <div class="col-sm-1">
-	      <button id="send" type="submit" class="btn btn-default btn-sm">Send</button>
-	    </div>
-	  </div>
-	</form>
-	</div>
-      </div>
+    <h1>Live camera</h1>
+
+    <div class="menu">
+
+        <a class="menuButton" href="/Home"> Home</a>
+        <a class="menuButton" href="/Live"> Live Broadcast</a>
+        <a class="menuButton" href="/Gallery"> Gallery</a>
+
+    </div>
+
+    <div class="searchForm">
+        <h3> Search from specific sensor</h3>
+        <form action="/GallerySearchData" method="get">
+            <label for="coordinateN" > Cordinate N of sensor: </label>
+            <input id = "coordinateN" name="coordinateN" type="number" placeholder="1.0" step="0.01" min="0" max="180"><br>
+            <label for="coordinateE" > Cordinate E of senosr: </label>
+            <input id = "coordinateE" name="coordinateE" type="number" placeholder="1.0" step="0.01" min="0" max="180"><br>
+            <label for="startTime" > Start time: </label>
+            <input id="startTime" name="startTime" type="datetime-local" name="startTime">
+            <label for="endTime" >  End time: </label>
+            <input id="endTime" name="endTime" type="datetime-local" name="endTime"> <br>
+            <input type="submit" value="Search">
+        </form>
+
+    </div>
+
+    <div class="searchForm">
+
+
+    </div>
+
+    <div id="ImageGallery" class="ImageGallery">
+
+    </div>
+
+    <input type="hidden" id="serverAddress" name="serverAddress" value="%(ws_addr)s">
+    <input type="hidden" id="search" name="search" value="%(search)s">
+    <input type="hidden" id="N" name="coordinateN" value="%(coordinateN)s">
+    <input type="hidden" id="E" name="coordinateE" value="%(coordinateE)s">
+    <input type="hidden" id="sTime" name="startTime" value="%(startTime)s">
+    <input type="hidden" id="eTime" name="endTime" value="%(endTime)s">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+    <script src="..\scripts\gallery.js"> </script>
+
     </body>
 </html>

@@ -1,5 +1,7 @@
 
 const address = document.getElementById("serverAddress").value
+
+
 var ws = new WebSocket('ws://' + address+ '/ws');
 
 function addSensor(sensor) {
@@ -24,7 +26,6 @@ function setSensorInfo(sensors){
 
 
  $(document).ready(function() {
-
 
         fetch("http://"+address+'/sensors')
             .then(response => {
@@ -59,6 +60,4 @@ function setSensorInfo(sensors){
             document.getElementById("sensorImage").src = "data:image/jpeg;base64,"+data["image"];
           };
 
-        ws.onopen = function() {
-             ws.send("sensor "+document.getElementById("sensorSelector").value);
-        };
+

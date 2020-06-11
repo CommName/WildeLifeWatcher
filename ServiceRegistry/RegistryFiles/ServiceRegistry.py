@@ -17,7 +17,7 @@ class ServiceRegistry:
 
     def dic(self):
         return { "ServiceName": self.serviceName, "ServiceAddress" : self.getFullAddress(),
-                 "ServerName": self.serviceName}
+                 "ServerName": self.serverName}
 
     def getFullAddress(self):
         return self.serviceAddress+":"+str(self.serviceport)

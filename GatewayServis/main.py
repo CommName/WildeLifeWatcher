@@ -11,6 +11,7 @@ import argparse
 import asyncio
 import threading
 from API import SensorAPI
+from API import GalleryAPI
 
 async def communicatorLayer(args):
     communicator = await comm.getCommunciator(args, None)
@@ -87,11 +88,13 @@ if __name__ == "__main__":
     web = WebDashboard.WebDashboard()
     imgAPI = ImageAPI.ImageAPI()
     sensorAPI = SensorAPI.SensorAPI()
+    galleryAPI = GalleryAPI.GalleryAPI()
 
     #Mounting objects
     cherrypy.tree.mount(web, '/', web_conf)
     cherrypy.tree.mount(imgAPI,'/images')
     cherrypy.tree.mount(sensorAPI, '/sensors', sensor_conf)
+    cherrypy.tree.mount(galleryAPI,'/galleryData')
 
     #Starting
     cherrypy.engine.start()

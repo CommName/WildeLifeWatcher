@@ -6,6 +6,7 @@ import os
 class WebDashboard:
     indexPage = None
     liveStreamPage = None
+    galleryPage = None
 
     ws_addr = None
 
@@ -13,10 +14,16 @@ class WebDashboard:
         self.ws_addr =  address
 
         cur_dir = os.path.normpath(os.path.abspath(os.path.dirname(__file__)))
+
         index_path = "./Public/HTML/index.html"
         self.indexPage = open(index_path, 'r').read()
+
         liveStream_path = "./Public/HTML/LiveStream.html"
         self.liveStreamPage = open(liveStream_path, 'r').read()
+
+        gallery_path = "./Public/HTML/Gallery.html"
+        self.galleryPage = open(gallery_path, 'r').read()
+
 
 
     @cherrypy.expose
@@ -33,7 +40,19 @@ class WebDashboard:
 
     @cherrypy.expose
     def Gallery(self):
-        return self.indexPage % {'username': "User123" , 'ws_addr': self.ws_addr}
+        return self.galleryPage % { 'ws_addr': self.ws_addr,
+                                    'search': "",
+                                    "coordinateN": "", "coordinateE": "",
+                                    'startTime': "", 'endTime': ""
+                                    }
+
+    @cherrypy.expose
+    def GallerySearchData(self, coordinateN,coordinateE, startTime, endTime):
+        return self.galleryPage % { 'ws_addr': self.ws_addr, 'search': "dataSearch",
+                                    "coordinateN":coordinateN, "coordinateE": coordinateE,
+                                    'startTime': startTime, 'endTime' : endTime
+                                    }
+
 
     @cherrypy.expose
     def ws(self):
