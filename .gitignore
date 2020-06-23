@@ -1,8 +1,8 @@
 #Data
 *.csv
 DataService/images/*
-
-
+*.model
+GatewayServis/sessions/*.lock
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

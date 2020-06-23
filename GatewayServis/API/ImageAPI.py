@@ -1,6 +1,7 @@
 import  cherrypy
 import requests
 import json
+from CommunicationLayer import ServiceRegistry
 
 @cherrypy.popargs('imageName')
 class ImageAPI(object):
@@ -10,16 +11,10 @@ class ImageAPI(object):
     @cherrypy.expose()
     def index(self, imageName):
         #Get data centaras
+
+        servicesArray = ServiceRegistry.getServices("Data")
+
         s = requests.Session()
-        parametars = {"serviceName": "Data"}
-
-        r = s.get(self.address, params=parametars)
-        if r.status_code < 200 or r.status_code >= 300:
-            raise cherrypy.HTTPError(503, "Registry service not available")
-
-        servicesArray = json.loads(r.text)
-        if len(servicesArray) == 0:
-            raise cherrypy.HTTPError(503, "Data services are unavailable at the moment")
 
         for service in servicesArray:
             response  = s.get(service["ServiceAddress"]+"/image/"+imageName,)

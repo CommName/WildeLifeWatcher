@@ -4,6 +4,17 @@ var numberOfPicturseShown = 0
 var pictureData = []
 
 
+function addAnimalOption(animal) {
+    var x = document.createElement("OPTION");
+    x.setAttribute("value", animal);
+    var t = document.createTextNode(animal);
+    x.appendChild(t);
+    document.getElementById("animalName").appendChild(x);
+}
+const allAnimals = JSON.parse(document.getElementById("animalList").value);
+allAnimals.forEach(animal => addAnimalOption(animal));
+
+
 const queuingStrategy = new ByteLengthQueuingStrategy({ highWaterMark: 1 });
 var size = queuingStrategy.size(250);
 
@@ -21,6 +32,13 @@ if(document.getElementById("search").value == "dataSearch"){
     });
 }
 
+if(document.getElementById("search").value == "infomrationSearch"){
+    url = "http://"+address+'/galleryData/informationSearch?' + $.param({
+    animalName: document.getElementById("aName").value,
+    feeding: document.getElementById("feeding").value,
+    notfeeding: document.getElementById("notfeeding").value
+    });
+}
 
 
 
@@ -42,11 +60,20 @@ fetch(url).then(response => {
 
         for(index = numberOfPicturseShown; index < numberOfPicturseShown+10; index++){
             var newImageDiv = document.createElement("div")
+            var link = document.createElement("a")
             var image = new Image()
-            console.log( pictureData[index])
-            image.src = '/images/'+ pictureData[index].id
+            var imageName =  ""
+            if (document.getElementById("search").value == "infomrationSearch"){
+                imageName =  pictureData[index].imageName
+            }
+            else {
+                imageName = pictureData[index].id
+            }
+            link.href ="/ImageDescription?" + $.param({imageName:imageName});
+            image.src = '/images/'+ imageName
             newImageDiv.className  = "GalleryImage"
-            newImageDiv.appendChild(image)
+            link.appendChild(image)
+            newImageDiv.appendChild(link)
             imageDiv.appendChild(newImageDiv)
         }
         numberOfPicturseShown += 10;
@@ -69,7 +96,6 @@ fetch(url).then(response => {
       }
       string += "]"
       string = string.split("}{").join("} ,{ ");
-      console.log(string)
       newImageData = JSON.parse(string)
       pictureData = pictureData.concat(newImageData)
 

@@ -19,7 +19,8 @@ class VGG16imagenetKNN (DataAnalyser.DataAnalyser):
 		# classify the image
 
 
-	def analyseImage(self, image):
+	def analyseImage(self, ogimage):
+		image = ogimage.copy()
 		image = cv2.resize(image,(224,224))
 
 		#mozda je potrebno deljenje??? sa /255.0
@@ -38,10 +39,13 @@ class VGG16imagenetKNN (DataAnalyser.DataAnalyser):
 
 		(imagenetId, label, prob) = p[0][0]
 
+
 		if(prob <0.5):
 			return None
 
-		return { 'ImageNetId' : imagenetId, label : 1, 'probability' : prob.item() }
+		data = { label : True }
+
+		return super().nextAnalyser(ogimage, data)
 
 
 

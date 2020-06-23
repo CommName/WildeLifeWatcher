@@ -26,8 +26,8 @@ class NATSCommunication (Communicator.Communicator):
         print(address)
         print(self.sensorsTopicName)
 
-    async def sendMessage(self, image, imageId):
-        jsonData = super().encodeMessageJSON(image,imageId)
+    async def sendMessage(self, image, imageId, coordinateN, coordinateE):
+        jsonData = super().encodeMessageJSON(image,imageId, coordinateN, coordinateE)
         print(self.analyticsTopicName)
         await self.nc.publish(self.analyticsTopicName, jsonData.encode())
 

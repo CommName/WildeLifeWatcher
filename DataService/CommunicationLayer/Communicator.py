@@ -9,7 +9,7 @@ class Communicator(ABC):
 
 
     @abstractmethod
-    async def sendMessage(self, image, imageId):
+    async def sendMessage(self, image, imageId, CoordinateN, CoordinateE):
         pass
 
     @abstractmethod
@@ -20,10 +20,10 @@ class Communicator(ABC):
     async def recvRequest(self, msg):
         pass
 
-    def encodeMessageJSON(self, image, imageId):
+    def encodeMessageJSON(self, image, imageId, CoordinateN, CoordinateE):
         _, imdata = cv2.imencode('.JPG', image)
         imageAsString = base64.b64encode(imdata).decode()
-        jsonData = json.dumps({"imageId": str(imageId), "image": imageAsString})
+        jsonData = json.dumps({"imageId": str(imageId), "image": imageAsString, "CoordinateN": CoordinateN, "CoordinateE":CoordinateE})
         return jsonData
 
     def decodeMessageJSON(self, jsonData):

@@ -65,6 +65,7 @@ ag.add_argument('-csv', "--CSVFile", required=False, default="dataset.csv", help
 ag.add_argument('-N', "--NorthCoordiante", required=False, default="40.0", help="North Coordinate of sensor")
 ag.add_argument('-E', "--EastCoordinate", required=False, default="40.0", help="East coordinate of sensor")
 ag.add_argument('-fps', "--FramesPerSecond", required=False, default="1", help="Frames per second")
+ag.add_argument('-r', "--serviceRegistryAddress", required=False, default="http://127.0.0.1:8761/", help="Service registry address")
 
 
 args = vars(ag.parse_args())
@@ -83,7 +84,7 @@ loop = asyncio.get_event_loop()
 sensorThread = threading.Thread(target=asyncoThreading, args=(loop,logic,))
 sensorThread.start()
 
-ServiceRegistry.registry("Sensors",args["name"], port= args["port"])
+ServiceRegistry.registry("Sensors",args["name"], port= args["port"],serviceRegistryAddress=args['serviceRegistryAddress'])
 
 API = APIGateway.Gateway(logic)
 cherrypy.config.update({'server.socket_port': args["port"]})

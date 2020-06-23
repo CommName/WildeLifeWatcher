@@ -1,30 +1,46 @@
 import cherrypy
 import json
 import requests
+from NotificationRegistry import NotificationRegistry
+from CommunicationLayer import ServiceRegistry
 class GalleryAPI:
 
-    address = "http://127.0.0.1:8761/"
+
+
+    @cherrypy.expose
+    def GetImageDetails(self, imageName):
+
+        query  = {
+            "imageName": imageName
+        }
+
+        s = requests.Session()
+
+        servicesArray = ServiceRegistry.getServices("Data")
+        details = []
+        for service in servicesArray:
+            r = s.get(service["ServiceAddress"] + "/info",params=query )
+            details.append(json.loads(r.text))
+            break
+
+        servicesArray = ServiceRegistry.getServices("Analytics")
+        for service in servicesArray:
+            print(service["ServiceAddress"] + "/imageSearch")
+            r = requests.get(service["ServiceAddress"] + "/imageSearch", params=query)
+            details.append(json.loads(r.text))
+
+
+
+        return json.dumps(details).encode()
+
 
     @cherrypy.expose
     def GetImages(self):
-        cherrypy.response.headers['Content-Type'] = 'application/json'
 
+        servicesArray = ServiceRegistry.getServices("Data")
         s = requests.Session()
-
-        # Get data centaras
-        s = requests.Session()
-        parametars = {"serviceName": "Data"}
-
-        r = s.get(self.address, params=parametars)
-        if r.status_code < 200 or r.status_code >= 300:
-            raise cherrypy.HTTPError(503, "Registry service not available")
-
-        servicesArray = json.loads(r.text)
-        if len(servicesArray) == 0:
-            raise cherrypy.HTTPError(503, "Data services are unavailable at the moment")
-
-
         for service in servicesArray:
+            print(service["ServiceAddress"]+"/data")
             r = s.get(service["ServiceAddress"]+"/data", stream=True)
             for line in r.iter_content(1024):
                 yield  line
@@ -32,25 +48,13 @@ class GalleryAPI:
     GetImages._cp_config =  {'response.stream' : True}
 
 
+
+
     @cherrypy.expose
     def dataSearch(self, coordinateN, coordinateE, startTime, endTime):
 
-
-        cherrypy.response.headers['Content-Type'] = 'application/json'
-
+        servicesArray = ServiceRegistry.getServices("Data")
         s = requests.Session()
-
-        # Get data centaras
-        s = requests.Session()
-        parametars = {"serviceName": "Data"}
-
-        r = s.get(self.address, params=parametars)
-        if r.status_code < 200 or r.status_code >= 300:
-            raise cherrypy.HTTPError(503, "Registry service not available")
-
-        servicesArray = json.loads(r.text)
-        if len(servicesArray) == 0:
-            raise cherrypy.HTTPError(503, "Data services are unavailable at the moment")
 
         query = { }
         if coordinateE=="" and  float(coordinateE) >0 :
@@ -70,3 +74,25 @@ class GalleryAPI:
                 yield  line
 
     dataSearch._cp_config =  {'response.stream' : True}
+
+    @cherrypy.expose
+    def informationSearch(self, animalName, feeding, notfeeding):
+
+        servicesArray = ServiceRegistry.getServices("Analytics")
+        s = requests.Session()
+
+        query = {
+        }
+
+        if animalName in list(NotificationRegistry.NotificationRegistry.Instance().animalSubscription.keys()):
+            query['animalName'] = animalName
+
+        if feeding != notfeeding:
+            query["feeding"] = feeding
+
+        for service in servicesArray:
+            r = s.get(service["ServiceAddress"] + "/informationSearch", params=query, stream=True)
+            for line in r.iter_content(1024):
+                yield line
+
+    dataSearch._cp_config = {'response.stream': True}

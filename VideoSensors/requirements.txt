@@ -3,4 +3,6 @@ nats-python
 asyncio-nats-client
 opencv-contrib-python
 cherrypy
-py-eureka-client
+requests
+pymongo
+imutils

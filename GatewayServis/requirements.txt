@@ -1,1 +1,8 @@
+wheel
+nats-python
+asyncio-nats-client
+opencv-contrib-python
+cherrypy
+requests
+imutils
 ws4py

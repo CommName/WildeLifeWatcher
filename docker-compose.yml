@@ -1,0 +1,99 @@
+version: "3"
+services:
+    sensor1:
+        build: 
+            context: ./VideoSensors/
+            dockerfile: DOCKERFILE
+        ports: 
+            - 9000:9000
+        environment:
+            - NATSaddress=nats
+            - ServiceRegistry=http://registry:8761/
+            - Name=sensor1
+        depends_on:
+            - registry
+            - nats
+        
+    sensor2:
+        build: 
+            context: ./VideoSensors/
+            dockerfile: DOCKERFILE
+        ports: 
+            - 9001:9001
+        environment:
+            - NATSaddress=nats
+            - ServiceRegistry=http://registry:8761/
+            - Name=sensor2
+            - Port=9001
+            - EastCoordinate=40.0
+            - NorthCoordiante=40.0
+        depends_on:
+            - registry
+            - nats
+            
+    data:
+        build:
+            context: ./DataService/
+            dockerfile: DOCKERFILE
+        ports: 
+            - 9010:9010
+        environment:
+            - NATSaddress=nats
+            - DataBaseAddress=mongodb://mongo-data::27017
+            - ServiceRegistry=http://registry:8761/
+        depends_on:
+            - registry
+            - mongo-data
+            - nats
+            
+    analytics:
+        build: 
+            context: ./Analytics/
+            dockerfile: DOCKERFILE
+        ports: 
+            - 9020:9020
+        environment:
+            - NATSaddress=nats
+            - DataBaseAddress=mongodb://mongo-data::27017
+            - ServiceRegistry=http://registry:8761/
+        depends_on:
+            - registry
+            - mongo-data
+            - nats
+    web:
+        build: 
+            context: ./GatewayServis/
+            dockerfile: DOCKERFILE
+        ports: 
+            - 8080:8080
+        environment:
+            - NATSaddress=nats
+            - ServiceRegistry=http://registry:8761/
+        depends_on:
+            - registry
+            - mongo-data
+            - nats
+            - sensor1
+            - sensor2
+            - data
+            - analytics
+            
+    registry:
+        build: 
+            context: ./ServiceRegistry/
+            dockerfile: DOCKERFILE
+        ports: 
+            - 8761:8761
+        
+    mongo-data:
+        image: mongo
+        restart: always
+        ports:
+            - 27017:27017
+    
+    nats:
+        image: nats
+        restart: always
+        ports:
+            - 4222:4222
+    

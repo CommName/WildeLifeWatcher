@@ -9,8 +9,9 @@ class DataBaseAPI(object):
     Logic = None;
 
     def __init__(self, logic):
-        print('construct')
         self.Logic = logic
+
+
 
     @cherrypy.tools.accept(media = "text/plain")
     def GET(self, coordinateN=None, coordinateE=None, startTime=None, endTime=None):

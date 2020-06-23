@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from StorageSystem import Storage
 from pymongo import MongoClient
 class MongoStorage(Storage.Storage):
@@ -26,6 +28,14 @@ class MongoStorage(Storage.Storage):
         images = self.table.find({'coordinateN' : coordinateN, 'coordinateE': coordinateE})
         return images
 
+    def getImageDetials(self, imageName):
+        query = {
+            "_id": ObjectId(imageName)
+        }
+        results = self.table.find_one(query)
+
+        return results
+
     def getImages(self, coordinateN, coordinateE, startTime, endTime):
         query = {
             "time" : { "$gt" : startTime, "$lt" : endTime}
@@ -36,7 +46,6 @@ class MongoStorage(Storage.Storage):
         if not coordinateE is None:
             query["coordinateE"] : coordinateE
 
-        print(query)
         results =  self.table.find(query).sort("time", -1)
 
         return results

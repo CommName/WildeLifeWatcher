@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="notifications.css">
         <title>WildeLife watcher</title>
     </head>
     <body>
@@ -16,15 +17,29 @@
         <a class="menuButton" href="/Home"> Home</a>
         <a class="menuButton" href="/Live"> Live Broadcast</a>
         <a class="menuButton" href="/Gallery"> Gallery</a>
+        <a class="menuButton" href="/Subscribitons"> Subscribitons</a>
 
     </div>
 
     <div class="body">
         <div class="post">
-            <img class="postImage" src="https://www.w3schools.com/html/pic_trulli.jpg" alt="Test" >
-            <p class="postText" > Neki tekst koji je opis slike</p>
+            <img class="postImage" src="https://lh3.googleusercontent.com/proxy/gt4G8Ea1_H9fkKVYTTqI1j3-Oz6uOvjsi_wQ5u-4DMO7G9ZonorJZnbD8ae9NBCct19RHVIDP0cdDqucwdFwmQqsMSYktVg0cj7EYt6cpfGz" alt="Test" >
+            <p class="postText" > Page Live is live broadcast from video sensors</p>
+        </div>
+        <div class="post">
+            <img class="postImage" src="https://kostaman.edu.rs/wp-content/uploads/2016/05/Apps-Gallery-icon-300x300.png" alt="Test" >
+            <p class="postText" > Page Gallery contains every photo taken and it se searchable by diffrent parametars</p>
+        </div>
+        <div class="post">
+            <img class="postImage" src="https://previews.123rf.com/images/bsd555/bsd5551808/bsd555180801813/106705160-subscribe-button-click-color-icon-subscription-social-media-app-hand-pressing-button-isolated-vector.jpg" alt="Test" >
+            <p class="postText" > GPage Subscribtions is a page where you can manage your subscribtions</p>
         </div>
     </div>
+    <input type="hidden" id="serverAddress" name="serverAddress" value="%(ws_addr)s">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+    <script src="\scripts\notifications.js"> </script>
+    <script src="\scripts\AnimalSubscribtion.js"> </script>
 
     </body>
 </html>

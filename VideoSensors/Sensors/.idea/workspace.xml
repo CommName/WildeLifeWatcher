@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="85afccc9-f5b8-421f-beb0-919f84928eed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../CommandService/Commands/Command.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../CommandService/Commands/CommandContainer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../CommandService/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DataService/API/ImageInfo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GatewayServis/Public/JS/imageDetails.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GatewayServis/Public/JS/subscription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Analytics/API/DBapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Analytics/API/DBapi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Analytics/CommunicationLayer/Communicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Analytics/CommunicationLayer/Communicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Analytics/CommunicationLayer/NATSCommunication.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Analytics/CommunicationLayer/NATSCommunication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Analytics/StorageSystem/MongoStorage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Analytics/StorageSystem/MongoStorage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Analytics/StorageSystem/Storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Analytics/StorageSystem/Storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Analytics/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Analytics/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DataService/API/DataBaseAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../DataService/API/DataBaseAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DataService/CommunicationLayer/ServiceRegistry.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../DataService/CommunicationLayer/ServiceRegistry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DataService/StorageSystem/MongoStorage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../DataService/StorageSystem/MongoStorage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DataService/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../DataService/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DataService/requirments.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/API/GalleryAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/API/GalleryAPI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/API/MyWebSocket.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/API/MyWebSocket.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/API/WebDashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/API/WebDashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/CommunicationLayer/NATSCommunication.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/CommunicationLayer/NATSCommunication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/NotificationRegistry/NotificationRegistry.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/NotificationRegistry/NotificationRegistry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/Public/HTML/Gallery.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/Public/HTML/Gallery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/Public/HTML/LiveStream.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/Public/HTML/LiveStream.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/Public/HTML/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/Public/HTML/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/Public/JS/gallery.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/Public/JS/gallery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/RawData/animalList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/RawData/animalList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GatewayServis/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../GatewayServis/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirements.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1da55x2835AcJTZudGCEyWKPwXD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85afccc9-f5b8-421f-beb0-919f84928eed" name="Default Changelist" comment="" />
+      <created>1592650183079</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592650183079</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2383" y="325" key="FileChooserDialogImpl" timestamp="1592650194498">
+      <screen x="1920" y="206" width="1366" height="728" />
+    </state>
+    <state x="2383" y="325" key="FileChooserDialogImpl/1920.206.1366.728/0.0.1920.1040@1920.206.1366.728" timestamp="1592650194498" />
+  </component>
+</project>

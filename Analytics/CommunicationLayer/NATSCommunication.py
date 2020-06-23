@@ -7,9 +7,8 @@ from CommunicationLayer import Communicator
 class NATSCommunication (Communicator.Communicator):
     nc = None
     sid = None
-    sensorsTopicName = "WildLife.Sensors.Data"
     analyticsTopicName = "WildLife.Analytics"
-    requestTopicName = "WildLife.Data"
+    dataTopicName = "WildLife.Information"
     logic = None
 
 
@@ -22,17 +21,19 @@ class NATSCommunication (Communicator.Communicator):
         await self.nc.connect(address)
         await self.nc.subscribe(self.analyticsTopicName, cb= self.recvMessage)
 
-    async def sendMessage(self, image, analysedData):
-        return
-
+    async def sendMessage(self, analysticData):
+        del analysticData['_id']
+        jsonData = json.dumps(analysticData)
+        await self.nc.publish(self.dataTopicName, jsonData.encode())
+        print(jsonData)
 
     async def recvMessage(self, msg):
         print(msg)
         subject = msg.subject
         reply = msg.reply
         data = json.loads(msg.data.decode())
-        image,imageName = super().decodeMessageJSON(data)
-        await self.logic.newImage(image,imageName)
+        image,imageName, coordinateN, coordinateE = super().decodeMessageJSON(data)
+        await self.logic.newImage(image,imageName, coordinateN, coordinateE)
 
 
 

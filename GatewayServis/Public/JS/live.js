@@ -2,7 +2,7 @@
 const address = document.getElementById("serverAddress").value
 
 
-var ws = new WebSocket('ws://' + address+ '/ws');
+var wsLive = new WebSocket('ws://' + address+ '/ws');
 
 function addSensor(sensor) {
   var scrollbar = document.getElementById("sensorSelector");
@@ -13,6 +13,7 @@ function addSensor(sensor) {
 }
 
 function setSensorInfo(sensors){
+
   var sensorName = document.getElementById("sensorSelector").value
   for (index = 0; index < sensors.length; index++ ){
     if (sensors[index].Name = sensorName){
@@ -20,7 +21,7 @@ function setSensorInfo(sensors){
     }
   }
   console.log("change")
-  ws.send("sensor "+sensorName)
+  wsLive.send("sensor "+sensorName)
 }
 
 
@@ -36,6 +37,7 @@ function setSensorInfo(sensors){
                     Sensors = data;
                     data.forEach(addSensor);
                     document.getElementById("sensorSelector").onchange = function(){setSensorInfo(data); };
+                    setSensorInfo(data[0]);
                 }
                 else {
                     document.getElementById("sensorSelector").disabled = true;
@@ -48,14 +50,14 @@ function setSensorInfo(sensors){
 
         window.onbeforeunload = function(e) {
 
-            ws.close();
+            wsLive.close();
 
             if(!e) e = window.event;
             e.stopPropagation();
             e.preventDefault();
           };
 
-        ws.onmessage = function (evt) {
+        wsLive.onmessage = function (evt) {
             data = JSON.parse(evt.data)
             document.getElementById("sensorImage").src = "data:image/jpeg;base64,"+data["image"];
           };

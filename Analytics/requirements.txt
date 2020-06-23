@@ -1,7 +1,9 @@
-Python 2.7
-Tenorflow
-NumPy
-SciPy
-MatPlot Lib
-python-consul
-dnspython
+Tensorflow
+wheel
+nats-python
+asyncio-nats-client
+opencv-contrib-python
+cherrypy
+requests
+pymongo
+imutils

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="notifications.css">
+        <title>WildeLife watcher</title>
+    </head>
+    <body>
+
+    <h1>Welcome to WildLife watcher</h1>
+
+    <div class="menu">
+
+        <a class="menuButton" href="/Home"> Home</a>
+        <a class="menuButton" href="/Live"> Live Broadcast</a>
+        <a class="menuButton" href="/Gallery"> Gallery</a>
+        <a class="menuButton" href="/Subscribitons"> Subscribitons</a>
+
+    </div>
+
+    <div id="subscribtion" >
+
+    </div>
+    <input type="hidden" id="serverAddress" name="serverAddress" value="%(ws_addr)s">
+    <input type="hidden" id="animalList" name="animalList" value='%(animal_list)s'>
+    <input type="hidden" id="activeSubscribtions" name="animalList" value='%(active_subs)s'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+    <script src="\scripts\notifications.js"> </script>
+    <script src="\scripts\AnimalSubscribtion.js"> </script>
+    <script src="\scripts\subscription.js"> </script>
+
+    </body>
+</html>

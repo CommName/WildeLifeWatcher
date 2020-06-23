@@ -16,8 +16,10 @@ ENV NorthCoordiante=44.0
 ENV FramesPerSecond=1
 ENV NATSaddress=nats://demo.nats.io:4222
 ENV CSVFile=/app/dataset.csv
-
+ENV Port=9000
+ENV Name=Sensor1
+ENV ServiceRegistry=http://127.0.0.1:8761/
 
 #Run app when the container launches
 
-CMD ["python", "/app/main.py"]
+CMD python /app/main.py -p $Port -n $Name -ns $NATSaddress -csv $CSVFile -N $NorthCoordiante -E $EastCoordinate -fps $FramesPerSecond -r $ServiceRegistry

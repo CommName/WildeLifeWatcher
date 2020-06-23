@@ -11,6 +11,7 @@ class NATSCommunication (Communicator.Communicator):
     sensorsTopicName = "WildLife.Sensors.Data"
     logic = None
     registryTopic = "WildLife.Registry"
+    anyalysedData = "WildLife.Information"
 
 
 
@@ -23,7 +24,14 @@ class NATSCommunication (Communicator.Communicator):
         await self.nc.connect(address)
         await self.nc.subscribe(self.registryTopic,cb=self.registryChange)
         await self.nc.subscribe(self.sensorsTopicName, cb= self.recvMessageFromSensors)
+        await self.nc.subscribe(self.anyalysedData, cb= self.recvMessageFromAnalyticService)
 
+
+    async def recvMessageFromAnalyticService(self, msg):
+        data = json.loads(msg.data.decode())
+        print(data)
+        for key in data:
+            NotificationRegistry.NotificationRegistry.Instance().notifyAnimalSubs(key, data["imageName"])
 
     async def registryChange(self, msg):
         print(msg.data)

@@ -1,0 +1,26 @@
+#Offical python runtime
+FROM python:3.8
+
+#Copy the current directory contents into the containter at /app
+ADD . /app
+COPY requirements.txt /tmp/
+
+#Install any needed packaged specifed in .\requirements.txt
+RUN pip install --trusted-host pypip.python.org  -r /tmp/requirements.txt
+
+#Ports
+
+#Environemnt variable
+ENV NATSaddress=nats://demo.nats.io:4222
+ENV communicator=NATS
+ENV DataBaseAddress=mongodb://localhost:27017
+ENV DataBaseType=Mongo
+ENV InternalPort=9020
+ENV Name=Data1
+ENV ServiceRegistry=http://127.0.0.1:8761/
+ENV EatingModel=EatingModel.model
+
+
+#Run app when the container launches
+
+CMD python /app/main.py -em $EatingModel -c $communicator -ns $NATSaddress -p $InternalPort -n $Name -d $DataBaseAddress -r $ServiceRegistry -db $DataBaseType

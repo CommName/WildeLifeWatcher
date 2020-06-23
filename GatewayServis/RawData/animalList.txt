@@ -1,11 +1,13 @@
-Giraffes
-Elephants
-Zebras
-Warthogs
-Hartebeest
-Ostriches
-Gazelles (Thomson's)
-Wildebeest
-Buffalo
-Guinea Fowls
-Gazelles (Grant's)
+ostrich
+gazelle
+warthog
+hartebeest
+zebra
+bison
+ox
+water_buffalo
+ice_bear
+impala
+tusker
+African_elephant
+coyote

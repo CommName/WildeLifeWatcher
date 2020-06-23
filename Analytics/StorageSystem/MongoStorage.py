@@ -12,33 +12,32 @@ class MongoStorage(Storage.Storage):
         self.table = self.imageNameDB.AnalyticsData
 
 
-    def insertAnalyticData(self, imageName, analyticData):
-        image_data = {
-            'imageName': imageName,
-        }
-        for key in analyticData:
-            image_data[key] = analyticData[key]
-
-        result = self.table.insert_one(image_data)
-
-        print(result)
+    def insertAnalyticData(self, analyticData):
+        result = self.table.insert_one(analyticData)
         return result.inserted_id
 
-    def getAnalyticData(self, imageName, animalName):
-        if (animalName is not None):
-            query = {
-                'imageName': imageName,
-                animalName : {'$gte' : 1}
-            }
-        else:
-            query = {
-                'imageName': imageName,
-            }
-        result = self.table.find(query)
+    def getAnalyticData(self, imageName):
+
+        query = {
+            'imageName': imageName,
+        }
+        result = self.table.find_one(query)
 
         return result
 
+    def getImagesWith(self, animalName, feeding):
+        query = {
 
+        }
+        if animalName is not None:
+            query[animalName] = True
+
+        if feeding is not None:
+            query["Eating"] = feeding
+
+        result = self.table.find(query).sort('_id',-1)
+
+        return result
 
 
 

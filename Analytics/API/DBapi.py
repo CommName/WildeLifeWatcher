@@ -1,6 +1,6 @@
 import cherrypy
 import datetime
-from bson.json_util import dumps
+import json
 import os
 
 @cherrypy.expose
@@ -12,9 +12,10 @@ class ImageAPI(object):
         self.Logic = logic
 
 
-    def GET(self, imageName = { "$regex": "." }, animalName = None):
-        print("test")
-        return dumps(self.Logic.storage.getAnalyticData(imageName, animalName))
+    def GET(self, imageName):
+        results = self.Logic.storage.getAnalyticData(imageName)
+        del results["_id"]
+        return json.dumps(results).encode()
 
     def POST(self, imageName, image):
         self.Logic.newImage(image,imageName)

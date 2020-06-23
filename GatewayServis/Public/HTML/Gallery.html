@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="notifications.css">
         <title>WildeLife watcher</title>
 
         <script type="application/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -19,12 +20,13 @@
         <a class="menuButton" href="/Home"> Home</a>
         <a class="menuButton" href="/Live"> Live Broadcast</a>
         <a class="menuButton" href="/Gallery"> Gallery</a>
+        <a class="menuButton" href="/Subscribitons"> Subscribitons</a>
 
     </div>
 
     <div class="searchForm">
         <h3> Search from specific sensor</h3>
-        <form action="/GallerySearchData" method="get">
+        <form action="/GallerySearchData" method="get" id="DataSearchForm">
             <label for="coordinateN" > Cordinate N of sensor: </label>
             <input id = "coordinateN" name="coordinateN" type="number" placeholder="1.0" step="0.01" min="0" max="180"><br>
             <label for="coordinateE" > Cordinate E of senosr: </label>
@@ -39,7 +41,17 @@
     </div>
 
     <div class="searchForm">
-
+        <h3> Search with information</h3>
+        <form action="/GalleryInformationDataSearch" method="get" id="InformationSearchFrom">
+            <label for="animalName" > Animal type: </label>
+            <select id="animalName", name="animalName",form= ="InformationSearchFrom">
+            </select>
+            <label for="eating"> Feeding</label><br>
+            <input type="checkbox" id="eating" name="feeding" value="True">
+            <label for="eating"> Not feeding</label><br>
+            <input type="checkbox" id="noteating" name="notfeeding" value="True">
+            <input type="submit" value="Search">
+        </form>
 
     </div>
 
@@ -53,9 +65,15 @@
     <input type="hidden" id="E" name="coordinateE" value="%(coordinateE)s">
     <input type="hidden" id="sTime" name="startTime" value="%(startTime)s">
     <input type="hidden" id="eTime" name="endTime" value="%(endTime)s">
+    <input type="hidden" id="aName" name="endTime" value="%(animalName)s">
+    <input type="hidden" id="feeding" name="endTime" value="%(feeding)s">
+    <input type="hidden" id="notfeeding" name="endTime" value="%(notfeeding)s">
+    <input type="hidden" id="animalList" name="animalList" value='%(animal_list)s'>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
-    <script src="..\scripts\gallery.js"> </script>
+    <script src="\scripts\gallery.js"> </script>
+    <script src="\scripts\notifications.js"> </script>
+    <script src="\scripts\AnimalSubscribtion.js"> </script>
 
     </body>
 </html>

@@ -4,7 +4,6 @@ from API import WebDashboard
 from API import ImageAPI
 from API import MyWebSocket
 from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
-from ws4py.websocket import EchoWebSocket
 from NotificationRegistry import NotificationRegistry
 from CommunicationLayer import comm
 import argparse
@@ -12,6 +11,7 @@ import asyncio
 import threading
 from API import SensorAPI
 from API import GalleryAPI
+from CommunicationLayer import ServiceRegistry
 
 async def communicatorLayer(args):
     communicator = await comm.getCommunciator(args, None)
@@ -24,16 +24,19 @@ def communicationThread(loop, args):
 
 
 #TODO Drugacije implementirati ovaj deo
-NotificationRegistry.NotificationRegistry.Instance().addSensor("Sensor1")
 
 
 ag = argparse.ArgumentParser()
 ag.add_argument('-c', '--communicator',required=False, default="NATS", help="Type of communciator to be used")
 ag.add_argument('-ns', "--NATSaddress", required=False, default="nats://localhost:4222", help="Address of NATS server")
+ag.add_argument('-r', "--serviceRegistryAddress", required=False, default="http://127.0.0.1:8761/", help="Service registry address")
+ag.add_argument('-p', "--port", required=False, default="8080", help="Port of the service")
+ag.add_argument('-n', "--name", required=False, default="Gateway", help="Name of the sensor")
 args = vars(ag.parse_args())
 
 if __name__ == "__main__":
-
+    ServiceRegistry.registry("Gateway", args["name"], port=args["port"],
+                             serviceRegistryAddress=args['serviceRegistryAddress'])
     #Communciator start
     communicationLoop = asyncio.get_event_loop()
     commThread = threading.Thread(target=communicationThread, args=(communicationLoop,args))
@@ -42,14 +45,19 @@ if __name__ == "__main__":
     #Cherry configuration
     WebSocketPlugin(cherrypy.engine).subscribe()
     cherrypy.tools.websocket = WebSocketTool()
-    cherrypy.config.update({'server.socket_host': '0.0.0.0'})
+    cherrypy.config.update({'server.socket_host': '0.0.0.0',
+                            'tools.sessions.on': True,
+                            'tools.sessions.storage_type': "File",
+                            'tools.sessions.storage_path': os.path.abspath(os.path.join(os.path.dirname( __file__ ), "sessions")),
+                            'tools.sessions.timeout': 10
+                            })
 
     #Cherrypy API config
     web_conf = {
         '/': {
             'tools.sessions.on' : True,
             'tools.response_headers.on': True,
-            'tools.staticdir.root' : os.path.abspath(os.getcwd()),
+            'tools.staticdir.root' : os.path.abspath(os.path.join(os.path.dirname( __file__ ))),
             'tools.response_headers.headers': [
                 ('X-Frame-options', 'deny'),
                 ('X-XSS-Protection', '1; mode=block'),
@@ -59,7 +67,11 @@ if __name__ == "__main__":
 
         '/style.css': {
             'tools.staticfile.on': True,
-            'tools.staticfile.filename': os.path.abspath(os.getcwd()) + '/Public/CSS/style.css'
+            'tools.staticfile.filename': os.path.abspath(os.path.join(os.path.dirname( __file__ ))) + '/Public/CSS/style.css'
+        },
+        '/notifications.css': {
+            'tools.staticfile.on': True,
+            'tools.staticfile.filename': os.path.abspath(os.path.join(os.path.dirname( __file__ ))) + '/Public/CSS/notifications.css'
         },
 
         '/scripts': {

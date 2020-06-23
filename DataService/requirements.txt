@@ -1,0 +1,6 @@
+pymongo
+cherrypy
+nats-python
+asyncio-nats-client
+opencv-contrib-python
+requests

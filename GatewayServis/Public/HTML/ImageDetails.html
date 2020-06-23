@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="notifications.css">
+        <title>WildeLife watcher</title>
+
+        <script type="application/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+        <script type="application/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+    <h1>Live camera</h1>
+
+    <div class="menu">
+
+        <a class="menuButton" href="/Home"> Home</a>
+        <a class="menuButton" href="/Live"> Live Broadcast</a>
+        <a class="menuButton" href="/Gallery"> Gallery</a>
+        <a class="menuButton" href="/Subscribitons"> Subscribitons</a>
+
+    </div>
+
+
+
+    <div class="searchForm">
+
+
+    </div>
+
+    <div id="ImageDetails" class="ImageDetails">
+        <img src="/images/%(imageName)s">
+        <p id="imageDescription"> </p>
+    </div>
+
+    <input type="hidden" id="serverAddress" name="serverAddress" value="%(ws_addr)s">
+    <input type="hidden" id="imageName" name="search" value="%(imageName)s">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+    <script src="..\scripts\imageDetails.js"> </script>
+    <script src="\scripts\notifications.js"> </script>
+    <script src="\scripts\AnimalSubscribtion.js"> </script>
+
+    </body>
+</html>
