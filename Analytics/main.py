@@ -50,10 +50,10 @@ class Logic:
 
 
     async def run(self, loop, args):
-        self.analyser = analy.getAnalyser(args)
-        print("[INFO] Analyser initialze")
         self.storage = stor.getStorage(args)
         print("[INFO] Storage initialze")
+        self.analyser = analy.getAnalyser(args)
+        print("[INFO] Analyser initialze")
         self.communicator = await comm.getCommunciator(args,self)
         print("[INFO] Communicator initialze")
 

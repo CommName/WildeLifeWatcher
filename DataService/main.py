@@ -70,7 +70,7 @@ args["port"] = int(args["port"])
 
 logic = DataServiceLogic(args)
 
-ServiceRegistry.registry("Analytics",args["name"], port= args["port"],serviceRegistryAddress=args['serviceRegistryAddress'])
+ServiceRegistry.registry("Data",args["name"], port= args["port"],serviceRegistryAddress=args['serviceRegistryAddress'])
 
 loop = asyncio.get_event_loop()
 sensorThread = threading.Thread(target=asyncoThreading, args=(loop,logic,))

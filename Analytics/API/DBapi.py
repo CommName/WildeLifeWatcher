@@ -14,7 +14,8 @@ class ImageAPI(object):
 
     def GET(self, imageName):
         results = self.Logic.storage.getAnalyticData(imageName)
-        del results["_id"]
+        if results is not None:
+            del results["_id"]
         return json.dumps(results).encode()
 
     def POST(self, imageName, image):

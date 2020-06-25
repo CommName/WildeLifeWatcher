@@ -34,12 +34,17 @@ class Logic:
         self.communciator.logic = self
         await self.communciator.connect(args["NATSaddress"])
 
+        self.sensor.skipFrames((args["skipFirstNFrames"]))
+        
         self.lastFrame = self.sensor.getFrame()
+
+
         while not (self.lastFrame is None):
             await self.communciator.sendMessage(self.lastFrame,self.coordinateN,self.coordinateE,self.Name)
 
             await asyncio.sleep(1//self.frameRate)
             self.lastFrame = self.sensor.getFrame()
+
 
     async def getCommunicator(self):
         communciator = NATSCommunication.NATSCommunication()
@@ -66,6 +71,7 @@ ag.add_argument('-N', "--NorthCoordiante", required=False, default="40.0", help=
 ag.add_argument('-E', "--EastCoordinate", required=False, default="40.0", help="East coordinate of sensor")
 ag.add_argument('-fps', "--FramesPerSecond", required=False, default="1", help="Frames per second")
 ag.add_argument('-r', "--serviceRegistryAddress", required=False, default="http://127.0.0.1:8761/", help="Service registry address")
+ag.add_argument('-s', "--skipFirstNFrames", required=False, default="0", help="Skip first N data")
 
 
 args = vars(ag.parse_args())
@@ -73,6 +79,7 @@ args["port"] = int(args["port"])
 args["FramesPerSecond"] = int(args["FramesPerSecond"])
 args["NorthCoordiante"] = float(args["NorthCoordiante"])
 args["EastCoordinate"] = float(args["EastCoordinate"])
+args["skipFirstNFrames"] = int(args["skipFirstNFrames"])
 
 #Main program
 logic = Logic(args)

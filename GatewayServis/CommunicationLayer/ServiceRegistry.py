@@ -22,8 +22,6 @@ def registryMe(serviceName, serverName, address, port, serviceRegistry):
     while True:
         try:
             r = s.post(serviceRegistry,params=args)
-
-
         except requests.exceptions.RequestException:
             time.sleep(5)
         time.sleep(3)

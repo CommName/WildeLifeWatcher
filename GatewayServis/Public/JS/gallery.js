@@ -54,8 +54,10 @@ fetch(url).then(response => {
 
         while(pictureData.length < numberOfPicturseShown+10 ) {
         done = await pump()
-         if(done)
+         if(done){
+              $(window).scroll(async function() { });
             break;
+            }
         }
 
         for(index = numberOfPicturseShown; index < numberOfPicturseShown+10; index++){

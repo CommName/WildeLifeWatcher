@@ -16,7 +16,7 @@ function setSensorInfo(sensors){
 
   var sensorName = document.getElementById("sensorSelector").value
   for (index = 0; index < sensors.length; index++ ){
-    if (sensors[index].Name = sensorName){
+    if (sensors[index].Name == sensorName){
       document.getElementById("sensorInfo").innerHTML = "Sensor name: " + sensorName + "<br /> N: " + sensors[index].N + "<br /> E: " + sensors[index].E
     }
   }

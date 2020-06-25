@@ -19,7 +19,8 @@ ENV CSVFile=/app/dataset.csv
 ENV Port=9000
 ENV Name=Sensor1
 ENV ServiceRegistry=http://127.0.0.1:8761/
+ENV SkipNFrames=0
 
 #Run app when the container launches
 
-CMD python /app/main.py -p $Port -n $Name -ns $NATSaddress -csv $CSVFile -N $NorthCoordiante -E $EastCoordinate -fps $FramesPerSecond -r $ServiceRegistry
+CMD python /app/main.py -p $Port -n $Name -ns $NATSaddress -csv $CSVFile -N $NorthCoordiante -E $EastCoordinate -fps $FramesPerSecond -r $ServiceRegistry -s $SkipNFrames

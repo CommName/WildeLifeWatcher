@@ -21,4 +21,10 @@ class CSVSensor:
         except StopIteration:
             return None
 
+    def skipFrames(self, numberOfFramesToSkip):
+        index = 0
+        while index<numberOfFramesToSkip:
+            row = next(self.csvFile)
+            index +=1
+
 

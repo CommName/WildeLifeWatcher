@@ -27,6 +27,7 @@ services:
             - Port=9001
             - EastCoordinate=40.0
             - NorthCoordiante=40.0
+            - SkipNFrames=15
         depends_on:
             - registry
             - nats
@@ -39,11 +40,11 @@ services:
             - 9010:9010
         environment:
             - NATSaddress=nats
-            - DataBaseAddress=mongodb://mongo-data::27017
+            - DataBaseAddress=mongodata
             - ServiceRegistry=http://registry:8761/
         depends_on:
             - registry
-            - mongo-data
+            - mongodata
             - nats
             
     analytics:
@@ -54,11 +55,12 @@ services:
             - 9020:9020
         environment:
             - NATSaddress=nats
-            - DataBaseAddress=mongodb://mongo-data::27017
+            - DataBaseAddress=mongodata
             - ServiceRegistry=http://registry:8761/
+            - EatingModel=/app/EatingModel.model
         depends_on:
             - registry
-            - mongo-data
+            - mongodata
             - nats
     web:
         build: 
@@ -71,7 +73,6 @@ services:
             - ServiceRegistry=http://registry:8761/
         depends_on:
             - registry
-            - mongo-data
             - nats
             - sensor1
             - sensor2
@@ -84,8 +85,10 @@ services:
             dockerfile: DOCKERFILE
         ports: 
             - 8761:8761
+        environment:
+            - NATSaddress=nats
         
-    mongo-data:
+    mongodata:
         image: mongo
         restart: always
         ports:

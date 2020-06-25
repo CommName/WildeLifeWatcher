@@ -1,10 +1,11 @@
+import time
+time.sleep(3)
 import cherrypy
 import os
 from API import WebDashboard
 from API import ImageAPI
 from API import MyWebSocket
 from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
-from NotificationRegistry import NotificationRegistry
 from CommunicationLayer import comm
 import argparse
 import asyncio

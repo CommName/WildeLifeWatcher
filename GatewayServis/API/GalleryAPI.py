@@ -19,17 +19,22 @@ class GalleryAPI:
         servicesArray = ServiceRegistry.getServices("Data")
         details = []
         for service in servicesArray:
-            r = s.get(service["ServiceAddress"] + "/info",params=query )
-            details.append(json.loads(r.text))
-            break
+            try:
+                r = s.get(service["ServiceAddress"] + "/info",params=query )
+                r.raise_for_status()
+                details.append(json.loads(r.text))
+                break
+            except requests.exceptions.RequestException:
+                continue
 
         servicesArray = ServiceRegistry.getServices("Analytics")
         for service in servicesArray:
-            print(service["ServiceAddress"] + "/imageSearch")
-            r = requests.get(service["ServiceAddress"] + "/imageSearch", params=query)
-            details.append(json.loads(r.text))
-
-
+            try:
+                r = requests.get(service["ServiceAddress"] + "/imageSearch", params=query)
+                r.raise_for_status()
+                details.append(json.loads(r.text))
+            except requests.exceptions.RequestException:
+                continue
 
         return json.dumps(details).encode()
 
@@ -40,10 +45,13 @@ class GalleryAPI:
         servicesArray = ServiceRegistry.getServices("Data")
         s = requests.Session()
         for service in servicesArray:
-            print(service["ServiceAddress"]+"/data")
-            r = s.get(service["ServiceAddress"]+"/data", stream=True)
-            for line in r.iter_content(1024):
-                yield  line
+            try:
+                r = s.get(service["ServiceAddress"]+"/data", stream=True)
+                r.raise_for_status()
+                for line in r.iter_content(1024):
+                    yield  line
+            except requests.exceptions.RequestException:
+                continue
 
     GetImages._cp_config =  {'response.stream' : True}
 
@@ -69,9 +77,13 @@ class GalleryAPI:
             query["endTime"] = endTime
 
         for service in servicesArray:
-            r = s.get(service["ServiceAddress"]+"/data",params=query, stream=True)
-            for line in r.iter_content(1024):
-                yield  line
+            try:
+                r = s.get(service["ServiceAddress"]+"/data",params=query, stream=True)
+                r.raise_for_status()
+                for line in r.iter_content(1024):
+                    yield  line
+            except requests.exceptions.RequestException:
+                continue
 
     dataSearch._cp_config =  {'response.stream' : True}
 
@@ -91,8 +103,12 @@ class GalleryAPI:
             query["feeding"] = feeding
 
         for service in servicesArray:
-            r = s.get(service["ServiceAddress"] + "/informationSearch", params=query, stream=True)
-            for line in r.iter_content(1024):
-                yield line
+            try:
+                r = s.get(service["ServiceAddress"] + "/informationSearch", params=query, stream=True)
+                r.raise_for_status()
+                for line in r.iter_content(1024):
+                    yield line
+            except requests.exceptions.RequestException:
+                continue
 
     dataSearch._cp_config = {'response.stream': True}
