@@ -38,12 +38,12 @@ class Logic:
             parametars = {
                 "coordinateN" : coordinateN,
                 "coordinateE" : coordinateE,
-                "command" : "Give food"
+                "listOfParamtears" : "Give food"
             }
 
             for service in serviceList:
                 try:
-                    r = requests.post(service["ServiceAddress"]+"/feed", params=parametars)
+                    r = requests.post(service["ServiceAddress"]+"/command", params=parametars)
                     return
                 except requests.exceptions.RequestException:
                     continue

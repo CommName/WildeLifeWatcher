@@ -1,6 +1,7 @@
 import json
 import cherrypy
 import requests
+from CommunicationLayer import ServiceRegistry
 
 @cherrypy.expose
 class Command:
@@ -14,24 +15,12 @@ class Command:
     listOfParametarsOfActuator = []
 
 
-    serviceRegistryAddress = "http://127.0.0.1:8761/"
+
 
 
     def getServices(self, serviceName):
+        ServiceRegistry.getServices(serviceName)
 
-        s = requests.Session()
-
-        parametars = {"serviceName": serviceName}
-
-        r = s.get(self.serviceRegistryAddress, params=parametars)
-        if r.status_code < 200 or r.status_code >= 300:
-            return []
-
-        servicesArray = json.loads(r.text)
-        if len(servicesArray) == 0:
-            return []
-
-        return servicesArray
 
     def castToType(self, value, type):
         if type == "string":
@@ -55,14 +44,14 @@ class Command:
         respone += "Request :  { \n"
         index = 0
         while index < len(self.listOfParametars):
-            respone += self.listOfParametars[index] + " " + self.typeOfParametars + "\n"
+            respone += self.listOfParametars[index] + " " + self.typeOfParametars[index] + "\n"
             index+=1
         respone += "}\n"
 
         respone += "Sensor query :  { "
         index = 0
         while index < len(self.listOfParametars):
-            respone += self.listOfParametarsOfActuator[index] + " " + self.typeOfParametars + "\n"
+            respone += self.listOfParametarsOfActuator[index] + " " + self.typeOfParametars[index] + "\n"
             index += 1
         respone += "}\n"
 
@@ -71,8 +60,11 @@ class Command:
         return respone
 
 
-    def POST(self,coordinateN, coordianteE, listOfParamtears):
-
+    def POST(self,coordinateN, coordinateE, listOfParamtears):
+        listOfParamtears = listOfParamtears.split(',')
+        coordinateN = float(coordinateN)
+        coordinateE = float(coordinateE)
+        print(listOfParamtears)
         if len(listOfParamtears) != len(self.listOfParametars):
             #TODO Throw HTTP error
             return
@@ -86,11 +78,16 @@ class Command:
         serviceArray = self.getServices("Sensors")
 
         for service in serviceArray:
-            serviceInfo =  requests.get(service["ServiceAddress"])
-            serviceInfo = json.loads(serviceInfo.text)
-            if serviceInfo["CoordinateN"] ==coordinateN and serviceInfo["CoordinateE"] == coordianteE:
-                requests.post(service["ServiceAddress"]+self.address, params = query)
-                return
+            try:
+                serviceInfo =  requests.get(service["ServiceAddress"])
+                serviceInfo = json.loads(serviceInfo.text)
+                if serviceInfo["CoordinateN"] ==coordinateN and serviceInfo["CoordinateE"] == coordinateE:
+                    print(query)
+                    requests.post(service["ServiceAddress"]+self.addressOfActuator, params = query)
+                    return
+            except requests.exceptions.RequestException as e:
+                print(e)
+                continue
 
 
 

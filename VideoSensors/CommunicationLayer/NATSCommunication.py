@@ -21,8 +21,8 @@ class NATSCommunication (Communicator.Communicator):
 
     async def sendMessage(self, image, gpsNCoordinate, gpsYCoordinate, Name):
         jsonData = super().encodeMessageJSON(image, gpsNCoordinate, gpsYCoordinate, Name)
-        print("sent: "+jsonData)
         await self.nc.publish(self.sendTopicName, jsonData.encode())
+
 
 
 

@@ -79,6 +79,20 @@ services:
             - data
             - analytics
             
+    command:
+        build:
+            context: ./CommandService/
+            dockerfile: DOCKERFILE
+        ports:
+            - 9030:9030
+        environment:
+            - ServiceRegistry=http://registry:8761/
+        depends_on:
+            - registry
+            - nats
+            
+            
+            
     registry:
         build: 
             context: ./ServiceRegistry/

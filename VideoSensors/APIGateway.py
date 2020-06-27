@@ -17,12 +17,6 @@ class Gateway(object):
     def GET(self):
         return self.Logic.communciator.encodeMessageJSON(self.Logic.lastFrame, self.Logic.coordinateN, self.Logic.coordinateE, self.Logic.Name)
 
-    def POST(self, coordinateN, coordinateE, image):
-        jpg_original = base64.b64decode(image)
-        jpg_as_np = np.frombuffer(jpg_original, dtype=np.uint8)
-        img = cv2.imdecode(jpg_as_np, flags=1)
-        self.Logic.coordinateE = coordinateE
-        self.Logic.coordinateN = coordinateN
-        self.Logic.lastFrame = img
-        #await self.Logic.communciator.sendMessage(img,coordinateN,coordinateE)
+    def POST(self,command):
+        print(command)
         return

@@ -1,0 +1,20 @@
+#Offical python runtime
+FROM python:3.8
+
+#Copy the current directory contents into the containter at /app
+ADD . /app
+COPY requirements.txt /tmp/
+
+#Install any needed packaged specifed in .\requirements.txt
+RUN pip install --trusted-host pypip.python.org  -r /tmp/requirements.txt
+
+#Ports
+
+#Environemnt variable
+ENV Port=9040
+ENV Name=Command1
+ENV ServiceRegistry=http://127.0.0.1:8761/
+
+#Run app when the container launches
+
+CMD python /app/main.py -p $Port -n $Name -r $ServiceRegistry

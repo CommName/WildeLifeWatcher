@@ -18,6 +18,8 @@ class CSVSensor:
             resp = urllib.request.urlopen(row["url"])
             image = np.asarray(bytearray(resp.read()), dtype="uint8")
             return cv2.imdecode(image,cv2.IMREAD_COLOR)
+        except urllib.error.URLError:
+            return self.getFrame()
         except StopIteration:
             return None
 

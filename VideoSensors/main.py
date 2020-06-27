@@ -35,13 +35,14 @@ class Logic:
         await self.communciator.connect(args["NATSaddress"])
 
         self.sensor.skipFrames((args["skipFirstNFrames"]))
-        
-        self.lastFrame = self.sensor.getFrame()
 
+        self.lastFrame = self.sensor.getFrame()
+        index = 0
 
         while not (self.lastFrame is None):
             await self.communciator.sendMessage(self.lastFrame,self.coordinateN,self.coordinateE,self.Name)
-
+            print("Image number "+str(index)+" has been sent!")
+            index +=1
             await asyncio.sleep(1//self.frameRate)
             self.lastFrame = self.sensor.getFrame()
 
