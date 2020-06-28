@@ -16,8 +16,8 @@ class CommandContainer:
             command = Command.Command()
             command.address = commandName
             command.listOfParametars = listOfParametars
-            command.addressOfActuator = typeOfParametars
-            command.typeOfParametars = addressOfActuator
+            command.addressOfActuator = addressOfActuator
+            command.typeOfParametars = typeOfParametars
             command.listOfParametarsOfActuator = listOfParametarsOfActuator
             self.activeCommands[commandName] = command
             conf = {
@@ -34,6 +34,7 @@ class CommandContainer:
     def PUT(self, commandName,  listOfParametars, typeOfParametars, addressOfActuator, listOfParametarsOfActuator):
         listOfParametars =  listOfParametars.split(",")
         typeOfParametars = typeOfParametars.split(",")
+        print(typeOfParametars)
         listOfParametarsOfActuator = listOfParametarsOfActuator.split(",")
         self.updateCommands(commandName, listOfParametars, typeOfParametars, addressOfActuator, listOfParametarsOfActuator)
         return
@@ -43,7 +44,6 @@ class CommandContainer:
     def GET(self):
         response = ""
         for commandName in self.activeCommands:
-            print(commandName)
             response += self.activeCommands[commandName].tooString()
 
         return response
