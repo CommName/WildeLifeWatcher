@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "ce6a572b-2c1a-45e7-bb18-0be52704aea7",
+		"name": "Wildlife watcher",
+		"description": "# Introduction\nMonitoring wildlife cameras\n\n\n\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "VideoSensor",
+			"item": [
+				{
+					"name": "Get info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Sensor}}/",
+							"host": [
+								"{{Sensor}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Current sensor information"
+					},
+					"response": []
+				},
+				{
+					"name": "Send command",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{Sensor}}/?command=This is a test command",
+							"host": [
+								"{{Sensor}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "command",
+									"value": "This is a test command",
+									"description": "VideoSensor will print command"
+								}
+							]
+						},
+						"description": "Execute a command on actuator"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "AnalyticsService",
+			"item": [
+				{
+					"name": "Image information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Analytics}}/imageSearch?imageName=5ef5ee4855330940f5437ac8",
+							"host": [
+								"{{Analytics}}"
+							],
+							"path": [
+								"imageSearch"
+							],
+							"query": [
+								{
+									"key": "imageName",
+									"value": "5ef5ee4855330940f5437ac8"
+								}
+							]
+						},
+						"description": "Get image information on specific image"
+					},
+					"response": []
+				},
+				{
+					"name": "Find image with specific attributes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Analytics}}/informationSearch?feeding=false",
+							"host": [
+								"{{Analytics}}"
+							],
+							"path": [
+								"informationSearch"
+							],
+							"query": [
+								{
+									"key": "animalName",
+									"value": "zebra",
+									"description": "(Optional argument) Pictures with specific animal inside them",
+									"disabled": true
+								},
+								{
+									"key": "feeding",
+									"value": "false",
+									"description": "(Optional argument) Is the animal on the picture feeding"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c8fcb4f9-6645-4273-b192-630f212609e8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "34f869ee-c3c0-4e14-b7cf-78f81519a124",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CommandService",
+			"item": [
+				{
+					"name": "Get command",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Command}}",
+							"host": [
+								"{{Command}}"
+							]
+						},
+						"description": "Get list of all commands"
+					},
+					"response": []
+				},
+				{
+					"name": "New/Update command",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Insert new command"
+					},
+					"response": []
+				},
+				{
+					"name": "ExecuteCommand",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{Command}}command?coordinateN=44.0&coordinateE=44.0&listOfParamtears=\"This command is from command servie\"",
+							"host": [
+								"{{Command}}command"
+							],
+							"query": [
+								{
+									"key": "coordinateN",
+									"value": "44.0"
+								},
+								{
+									"key": "coordinateE",
+									"value": "44.0"
+								},
+								{
+									"key": "listOfParamtears",
+									"value": "\"This command is from command servie\""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "DataService",
+			"item": [
+				{
+					"name": "InformationQuery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Data}}/info?imageName=5ef693405b3d310788c7e207",
+							"host": [
+								"{{Data}}"
+							],
+							"path": [
+								"info"
+							],
+							"query": [
+								{
+									"key": "imageName",
+									"value": "5ef693405b3d310788c7e207",
+									"description": "Name of the image "
+								}
+							]
+						},
+						"description": "Find information about image"
+					},
+					"response": []
+				},
+				{
+					"name": "Data request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Data}}/data?coordinateN=44&coordinateE=44&startTime=2020-05-27T00:31&endTime=2020-06-27T00:31",
+							"host": [
+								"{{Data}}"
+							],
+							"path": [
+								"data"
+							],
+							"query": [
+								{
+									"key": "coordinateN",
+									"value": "44",
+									"description": "(Optional) North coordinate of sensor "
+								},
+								{
+									"key": "coordinateE",
+									"value": "44",
+									"description": "(Optional) East coordinate of sensor"
+								},
+								{
+									"key": "startTime",
+									"value": "2020-05-27T00:31",
+									"description": "(Optional) Only images that were recorded after startTime. Format should be %Y-%m-%dT%H:%M"
+								},
+								{
+									"key": "endTime",
+									"value": "2020-06-27T00:31",
+									"description": "(Optional) Only images that were recorded before endTime. Format should be %Y-%m-%dT%H:%M"
+								}
+							]
+						},
+						"description": "Query all saved image by sensor who sent them"
+					},
+					"response": []
+				},
+				{
+					"name": "GetImage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Data}}/image?imageName=5ef693405b3d310788c7e207",
+							"host": [
+								"{{Data}}"
+							],
+							"path": [
+								"image"
+							],
+							"query": [
+								{
+									"key": "imageName",
+									"value": "5ef693405b3d310788c7e207",
+									"description": "Name of the image to be returned"
+								}
+							]
+						},
+						"description": "Get image by name"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GatewayService",
+			"item": [
+				{
+					"name": "Sensors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Gateway}}/sensors",
+							"host": [
+								"{{Gateway}}"
+							],
+							"path": [
+								"sensors"
+							]
+						},
+						"description": "Get active sensors that you can watch"
+					},
+					"response": []
+				},
+				{
+					"name": "Image information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Gateway}}/galleryData/GetImageDetails?imageName=5ef693405b3d310788c7e207",
+							"host": [
+								"{{Gateway}}"
+							],
+							"path": [
+								"galleryData",
+								"GetImageDetails"
+							],
+							"query": [
+								{
+									"key": "imageName",
+									"value": "5ef693405b3d310788c7e207"
+								}
+							]
+						},
+						"description": "Get all information from all active services on specific image"
+					},
+					"response": []
+				},
+				{
+					"name": "Get images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Gateway}}/galleryData/GetImages",
+							"host": [
+								"{{Gateway}}"
+							],
+							"path": [
+								"galleryData",
+								"GetImages"
+							]
+						},
+						"description": "Get all images without filtering them"
+					},
+					"response": []
+				},
+				{
+					"name": "Get image by sensor information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Gateway}}galleryData/dataSearch?coordinateN=44&coordinateE=44&startTime=2020-05-27T00:31&endTime=2020-06-27T00:31",
+							"host": [
+								"{{Gateway}}galleryData"
+							],
+							"path": [
+								"dataSearch"
+							],
+							"query": [
+								{
+									"key": "coordinateN",
+									"value": "44",
+									"description": "North coordinate of sensor (Negative numbers and empty string represent any value)"
+								},
+								{
+									"key": "coordinateE",
+									"value": "44",
+									"description": "East coordinate of sensor (Negative numbers and empty string represent any value)"
+								},
+								{
+									"key": "startTime",
+									"value": "2020-05-27T00:31",
+									"description": "Only images that were recorded after startTime. Format should be %Y-%m-%dT%H:%M"
+								},
+								{
+									"key": "endTime",
+									"value": "2020-06-27T00:31",
+									"description": "Only images that were recorded before endTime. Format should be %Y-%m-%dT%H:%M"
+								}
+							]
+						},
+						"description": "Get all images and filter them by sensor that recorded them"
+					},
+					"response": []
+				},
+				{
+					"name": "Get images with specific information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Gateway}}galleryData/informationSearch?animalName=zebra&feeding=true&notfeeding=false",
+							"host": [
+								"{{Gateway}}galleryData"
+							],
+							"path": [
+								"informationSearch"
+							],
+							"query": [
+								{
+									"key": "animalName",
+									"value": "zebra",
+									"description": "(Optional) Pictures with this animal"
+								},
+								{
+									"key": "feeding",
+									"value": "true",
+									"description": "(Optional) Pictures with animal that are eating"
+								},
+								{
+									"key": "notfeeding",
+									"value": "false",
+									"description": "(Optional) Pictures with animal that are not eating"
+								}
+							]
+						},
+						"description": "Get images that have specific information in them"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ServiceRegistry",
+			"item": [
+				{
+					"name": "Get list of services",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ServiceRegistry}}/?serviceName=test",
+							"host": [
+								"{{ServiceRegistry}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "serviceName",
+									"value": "test"
+								}
+							]
+						},
+						"description": "Get list of all servers that have registered specific type of service"
+					},
+					"response": []
+				},
+				{
+					"name": "Registry a service",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ServiceRegistry}}?serviceName=test&serviceAddress=test.com&servicePort=1010&serverName=test",
+							"host": [
+								"{{ServiceRegistry}}"
+							],
+							"query": [
+								{
+									"key": "serviceName",
+									"value": "test"
+								},
+								{
+									"key": "serviceAddress",
+									"value": "test.com"
+								},
+								{
+									"key": "servicePort",
+									"value": "1010"
+								},
+								{
+									"key": "serverName",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "73b88ec7-5538-4344-b50c-2e5e94480c1d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a4792ca0-abf6-483b-8f93-7c80a8503e99",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "040835c6-5c89-4757-ab4c-71a868f733ec",
+			"key": "Sensor",
+			"value": "http://127.0.0.1:9000"
+		},
+		{
+			"id": "df90b2d2-9f5f-4d46-a109-6b8008ff2e4e",
+			"key": "Analytics",
+			"value": "http://127.0.0.1:9020"
+		},
+		{
+			"id": "5fd667a8-ebf8-4579-a7e9-978bb799651e",
+			"key": "Command",
+			"value": "http://127.0.0.1:9030"
+		},
+		{
+			"id": "f83c282a-3e8e-4a4b-b8c4-e7ee10d50cae",
+			"key": "Data",
+			"value": "http://127.0.0.1:9010"
+		},
+		{
+			"id": "2b71d05f-2ae9-416d-b6dd-6eddfd79da0e",
+			"key": "Gateway",
+			"value": "http://127.0.0.1:8080"
+		},
+		{
+			"id": "7324b62b-f798-4ed6-a9bd-dcdf1c83d15a",
+			"key": "ServiceRegistry",
+			"value": "http://127.0.0.1:8761"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
