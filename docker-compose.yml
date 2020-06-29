@@ -71,6 +71,7 @@ services:
         environment:
             - NATSaddress=nats
             - ServiceRegistry=http://registry:8761/
+            - DomainName=127.0.0.1:8080
         depends_on:
             - registry
             - nats
@@ -84,7 +85,7 @@ services:
             context: ./CommandService/
             dockerfile: DOCKERFILE
         ports:
-            - 9030:9030
+            - 9040:9040
         environment:
             - ServiceRegistry=http://registry:8761/
         depends_on:

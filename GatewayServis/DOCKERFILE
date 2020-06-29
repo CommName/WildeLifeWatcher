@@ -16,9 +16,10 @@ ENV communicator=NATS
 ENV InternalPort=8080
 ENV Name=GateWay
 ENV ServiceRegistry=http://127.0.0.1:8761/
+ENV DomainName=127.0.0.1:8080
 
 
 #Run app when the container launches
 
 
-CMD python /app/main.py -c $communicator -ns $NATSaddress -p $InternalPort -n $Name -r $ServiceRegistry
+CMD python /app/main.py -d $DomainName -c $communicator -ns $NATSaddress -p $InternalPort -n $Name -r $ServiceRegistry

@@ -33,6 +33,7 @@ ag.add_argument('-ns', "--NATSaddress", required=False, default="nats://localhos
 ag.add_argument('-r', "--serviceRegistryAddress", required=False, default="http://127.0.0.1:8761/", help="Service registry address")
 ag.add_argument('-p', "--port", required=False, default="8080", help="Port of the service")
 ag.add_argument('-n', "--name", required=False, default="Gateway", help="Name of the sensor")
+ag.add_argument('-d', "--domain", required=False, default="127.0.0.1:8080", help="Domain of web application")
 args = vars(ag.parse_args())
 
 if __name__ == "__main__":
@@ -98,7 +99,7 @@ if __name__ == "__main__":
 
 
     #Creating API objects
-    web = WebDashboard.WebDashboard()
+    web = WebDashboard.WebDashboard(args["domain"])
     imgAPI = ImageAPI.ImageAPI()
     sensorAPI = SensorAPI.SensorAPI()
     galleryAPI = GalleryAPI.GalleryAPI()
