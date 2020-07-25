@@ -4,7 +4,6 @@ var ws = new WebSocket('ws://' + wsaddress+ '/ws');
 
  $(document).ready(function() {
 
-        console.log(document.cookie)
         window.onbeforeunload = function(e) {
 
             ws.close();
