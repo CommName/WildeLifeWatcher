@@ -4,22 +4,74 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="bootstrap.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="notifications.css">
+        
         <title>WildeLife watcher</title>
     </head>
     <body>
 
+        <header calss = "main_header">
+            <div class="container">
+                <nav class="navbar navbar-default" role="navigation"> 
+
+                  <div class="navbar-header">
+                    <h1 class="navbar-brand"><a href="/Home">Wildlife<span>watcher</a></h1> </div>
+                  
+                        <div class="menuBar">
+                            <ul class="menu">
+                            <li class="active"><a href="/Home">Home</a></li>
+                            <li><a href="/Live">Live</a></li>
+                            <li><a href="/Gallery">Gallery</a></li>
+                            <li><a href="/Subscribitons">Subscribitons</a></li>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+        </header>
+
     <h1>Welcome to WildLife watcher</h1>
 
-    <div class="menu">
 
-        <a class="menuButton" href="/Home"> Home</a>
-        <a class="menuButton" href="/Live"> Live Broadcast</a>
-        <a class="menuButton" href="/Gallery"> Gallery</a>
-        <a class="menuButton" href="/Subscribitons"> Subscribitons</a>
+    <section class="slider">
+        <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="item"> <img data-src="images/slider/slider1.jpg" alt="first slide" src="images/slider/slider1.jpg">
+              <div class="container">
+                <div class="carousel-caption text-left">
+                  <h1 class="">Quisque blandit sed</h1>
+                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.</p>
+                  <p><a class="btn btn-default btn-lg" href="#" role="button">get started</a><a class="btn btn-default btn-lg" href="#" role="button">read more</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="item"> <img data-src="images/slider/slider2.jpg" alt="second slide" src="images/slider/slider2.jpg">
+              <div class="container">
+                <div class="carousel-caption text-left">
+                  <h1 class="">Justo rutrum venenatis. Mauris accumsan posuere mauris</h1>
+                  <p>Sed et orci purus. Vestibulum molestie, dolor sit amet viverra facilisis, justo magna.</p>
+                  <p><a class="btn btn-default btn-lg" href="#" role="button">get started</a><a class="btn btn-default btn-lg" href="#" role="button">read more</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="item active"> <img data-src="images/slider/slider3.jpg" alt="third slide" src="images/slider/slider3.jpg">
+              <div class="container">
+                <div class="carousel-caption text-left">
+                  <h1 class="">Vivamus ultrices mattis</h1>
+                  <p>Consectetur pretium leo. Proin suscipit imperdiet neque, quis lacinia elit cursus nec.</p>
+                  <p><a class="btn btn-default btn-lg" href="#" role="button">get started</a><a class="btn btn-default btn-lg" href="#" role="button">read more</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon carousel-control-left"></span></a> <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon carousel-control-right"></span></a> </div>
+      </section>
 
-    </div>
 
     <div class="body">
         <div class="post">

@@ -75,10 +75,19 @@ if __name__ == "__main__":
             'tools.staticfile.on': True,
             'tools.staticfile.filename': os.path.abspath(os.path.join(os.path.dirname( __file__ ))) + '/Public/CSS/notifications.css'
         },
+        '/bootstrap.min.css': {
+            'tools.staticfile.on': True,
+            'tools.staticfile.filename': os.path.abspath(os.path.join(os.path.dirname( __file__ ))) + '/Public/CSS/bootstrap.min.css'
+        },
 
         '/scripts': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': './Public/JS/'
+        },
+
+        '/staticImages': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': './Public/Images/'
         },
 
         '/ws' : {
