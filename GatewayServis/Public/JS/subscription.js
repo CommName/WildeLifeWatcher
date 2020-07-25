@@ -20,10 +20,9 @@ function subscribtion(animal) {
 }
 
 function addAnimalCheckBox(animal) {
-    var lab = document.createElement("LABEL");
-    lab.for = animal;
-    lab.innerHTML = animal;
-    subDiv.appendChild(lab);
+    var checkBoxDiv = document.createElement("DIV")
+    checkBoxDiv.className = "ck-button";
+
 
     var x = document.createElement("INPUT");
     x.setAttribute("type", "checkbox");
@@ -32,9 +31,14 @@ function addAnimalCheckBox(animal) {
     x.checked = subscribed;
     x.onclick = function() { subscribtion(x)};
 
-    subDiv.appendChild(x);
-    var br = document.createElement("BR");
-    subDiv.appendChild(br);
+    checkBoxDiv.appendChild(x);
+
+    var lab = document.createElement("SPAN");
+    lab.for = animal;
+    lab.innerHTML = animal;
+    checkBoxDiv.appendChild(lab);
+    
+    subDiv.appendChild(checkBoxDiv);
 }
 $(document).ready(function() {
 

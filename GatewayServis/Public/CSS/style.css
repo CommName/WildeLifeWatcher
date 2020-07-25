@@ -40,13 +40,21 @@ background: #A45A19; }
 .livestreamBody{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     margin: 5px;
+    margin-top: 100px;
 
 }
 
 .sensorImage{
     flex-grow: 2;
     margin: 10px;
+    width: auto;
+    height: auto;
+    max-width: 600px;
+    max-height: 421px;
+    border: solid 1px white;
+
 }
 
 .sensorSpec {
@@ -54,6 +62,34 @@ background: #A45A19; }
     flex-direction: column;
     flex-grow: 1;
     margin: 10px;
+    max-width: 275px;
+
+    background-color: #383838;
+    color: white;
+    padding: 15px;
+    font-weight:  400;
+    font-family: 'Open Sans', sans-serif;
+    text-shadow: rgba(0, 0, 0, 0.3);
+    border: solid 1px white;
+}
+
+.SensorFPS {
+  display: flex;
+  flex-direction: row;
+  max-width: 275px;
+  flex-wrap: nowrap;
+  
+}
+.SensorFPS input[type=number]{
+  flex-grow: 2;
+  max-width: 175px;
+}
+
+.SensorFPS input[type=button]{
+  flex-grow: 1;
+  margin: 2px;
+  max-width: 75px;
+  text-align: center;
 }
 
 .ImageGallery{
@@ -333,4 +369,73 @@ header.normal {
 .three__blocks p.smaller small {
 	font-size: 14px;
 	color: #a5a5a5;
+}
+
+/* Checkbox button */
+.ck-button {
+
+  padding: 10px 10px;
+  font-weight:  400;
+  font-family: 'Open Sans', sans-serif;
+  color: #959595;
+
+  margin: 10px;
+
+	background: #333;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
+    border-radius:4px;
+    overflow:auto;
+    float:left;
+}
+
+.ck-button:hover {
+	  color: #fff;
+    background:#717171;
+}
+
+.ck-button label {
+    float:left;
+    width:4.0em;
+}
+
+.ck-button label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+}
+
+.ck-button label input {
+    position:absolute;
+    top:-20px;
+}
+
+.ck-button input:checked + span {
+    color:#fff;
+    border-color: #E74C3C;
+}
+
+#subscribtion {
+
+  margin-left: 75px;
+  margin-top: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-content: stretch;
+}
+
+.SubPageIntroduction{
+  background-color: #383838;
+  padding-left: 50px;
+  margin-top: 100px;
+  color: white;
+  font-weight:  400;
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: rgba(0, 0, 0, 0.3);
+}
+
+.SubPageIntroduction h1{
+  color: #e74c3c;
+  font-weight: bold;
+  text-shadow: 1px rgba(104,59,23,0.47);
 }
