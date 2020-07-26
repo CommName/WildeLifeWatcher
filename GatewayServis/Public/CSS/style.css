@@ -92,6 +92,7 @@ background: #A45A19; }
   text-align: center;
 }
 
+/*
 .ImageGallery{
     display: flex;
     flex-wrap: wrap;
@@ -102,6 +103,8 @@ background: #A45A19; }
 .GalleryImage{
     width: 50%;
 }
+
+*/
 
 
 /*Header*/
@@ -438,4 +441,74 @@ header.normal {
   color: #e74c3c;
   font-weight: bold;
   text-shadow: 1px rgba(104,59,23,0.47);
+}
+
+/* Portfolio */
+#ImageGallery {
+	margin: 13px;
+}
+#ImageGallery ul#Grid {
+	margin: 0 0 30px 0;
+	padding: 0;
+	position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+#ImageGallery ul#Grid li {
+	padding: 0 1px 1px 0;
+	margin: 1px;
+	display: block
+	position: relative;
+}
+#ImageGallery ul#Grid li a {
+	display: block;
+	position: relative;
+	color: #fff;
+}
+#ImageGallery ul#Grid span.text {
+	padding: 0px 10px;
+	height: 0;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+	z-index: 10;
+	overflow: hidden;
+	font-size: 22px;
+	font-weight: 400;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	color: #FFF;
+	line-height: 30px;
+	background: #E74C3C;
+}
+#ImageGallery ul#Grid span.text span {
+	color: #f9f9f9;
+	font-weight: 400;
+	display: block;
+	font-size: 14px;
+	text-transform: none;
+	line-height: 22px;
+}
+
+#ImageGallery ul#Grid li:hover span.text {
+	padding: 10px 10px;
+	height: auto;
+	overflow: visible;
+	text-decoration: none;
+}
+
+
+
+.searchForm {
+  background-color: #383838;
+    color: white;
+    padding: 15px;
+    font-weight:  400;
+    font-family: 'Open Sans', sans-serif;
+    text-shadow: rgba(0, 0, 0, 0.3);
+    border: solid 1px white;
+    margin: 20px;
 }

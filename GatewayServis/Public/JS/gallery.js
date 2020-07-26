@@ -1,5 +1,5 @@
 const address = document.getElementById("serverAddress").value
-const imageDiv =  document.getElementById("ImageGallery")
+const imageDiv =  document.getElementById("Grid")
 var numberOfPicturseShown = 0
 var pictureData = []
 
@@ -61,7 +61,7 @@ fetch(url).then(response => {
         }
 
         for(index = numberOfPicturseShown; index < numberOfPicturseShown+10; index++){
-            var newImageDiv = document.createElement("div")
+            var newImageLi = document.createElement("li")
             var link = document.createElement("a")
             var image = new Image()
             var imageName =  ""
@@ -72,11 +72,23 @@ fetch(url).then(response => {
                 imageName = pictureData[index].id
             }
             link.href ="/ImageDescription?" + $.param({imageName:imageName});
-            image.src = '/images/'+ imageName
-            newImageDiv.className  = "GalleryImage"
-            link.appendChild(image)
-            newImageDiv.appendChild(link)
-            imageDiv.appendChild(newImageDiv)
+            image.src = '/images/'+ imageName;
+            image.class="img-responsive";
+
+            var spanHeader = document.createElement("span");
+            spanHeader.className = "text";
+            spanHeader.innerHTML = "Press to get details:";
+            var spanTelo = document.createElement("span");
+            spanTelo.innerHTML = imageName;
+            spanHeader.appendChild(spanTelo);
+
+            link.appendChild(image);
+            link.appendChild(spanHeader);
+
+
+            newImageLi.appendChild(link)
+
+            imageDiv.appendChild(newImageLi)
         }
         numberOfPicturseShown += 10;
 
