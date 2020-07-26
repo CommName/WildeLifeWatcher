@@ -73,7 +73,7 @@ fetch(url).then(response => {
             }
             link.href ="/ImageDescription?" + $.param({imageName:imageName});
             image.src = '/images/'+ imageName;
-            image.class="img-responsive";
+            image.className ="img-responsive";
 
             var spanHeader = document.createElement("span");
             spanHeader.className = "text";

@@ -92,20 +92,6 @@ background: #A45A19; }
   text-align: center;
 }
 
-/*
-.ImageGallery{
-    display: flex;
-    flex-wrap: wrap;
-    align-content: stretch;
-    height: 100%;
-}
-
-.GalleryImage{
-    width: 50%;
-}
-
-*/
-
 
 /*Header*/
 header {
@@ -457,7 +443,7 @@ header.normal {
 #ImageGallery ul#Grid li {
 	padding: 0 1px 1px 0;
 	margin: 1px;
-	display: block
+	display: block;
 	position: relative;
 }
 #ImageGallery ul#Grid li a {
@@ -511,4 +497,18 @@ header.normal {
     text-shadow: rgba(0, 0, 0, 0.3);
     border: solid 1px white;
     margin: 20px;
+}
+
+.ImageDetails{
+  justify-content: center;
+  display: flex;
+  margin: 50px;
+}
+
+.QueryDiv{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  justify-content: center;
 }

@@ -38,8 +38,8 @@
             </nav>
           </div>
     </header>
-
-    <div class="searchForm" style="margin-top: 100px;">
+    <div class="QueryDiv">
+    <div class="searchForm">
         <h3> Search from specific sensor</h3>
         <form action="/GallerySearchData" method="get" id="DataSearchForm">
             <label for="coordinateN" > Cordinate N of sensor: </label>
@@ -61,14 +61,16 @@
         <form action="/GalleryInformationDataSearch" method="get" id="InformationSearchFrom">
             <label for="animalName" > Animal type: </label>
             <select id="animalName", name="animalName",form= ="InformationSearchFrom">
-            </select>
-            <label for="eating"> Feeding</label><br>
-            <input type="checkbox" id="eating" name="feeding" value="True">
-            <label for="noteating"> Not feeding</label><br>
-            <input type="checkbox" id="noteating" name="notfeeding" value="True">
+            </select> <br>
+            <label for="eating"> Feeding</label>
+            <input type="checkbox" id="eating" name="feeding" value="True"> <br>
+            <label for="noteating"> Not feeding</label>
+            <input type="checkbox" id="noteating" name="notfeeding" value="True"> <br>
             <input type="submit" value="Search">
         </form>
 
+    </div>
+    
     </div>
 
     <div id="ImageGallery" class="ImageGallery">
