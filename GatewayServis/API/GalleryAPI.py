@@ -65,9 +65,11 @@ class GalleryAPI:
         s = requests.Session()
 
         query = { }
-        if coordinateE=="" and  float(coordinateE) >0 :
+        print(coordinateE=="")
+        print(coordinateN)
+        if  coordinateE!="" and  float(coordinateE) >0 :
             query["coordinateE"] =  float(coordinateE)
-        if coordinateN=="" and float(coordinateN)>0 :
+        if coordinateN!="" and float(coordinateN)>0 :
             query["coordinateN"] = float(coordinateE)
 
         if startTime != "" :
