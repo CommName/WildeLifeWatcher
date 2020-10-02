@@ -43,6 +43,12 @@ class VGG16imagenetKNN (DataAnalyser.DataAnalyser):
 		if(prob <0.5):
 			return None
 
+		if label.lower() == 'african_elephant':
+			label = 'elephant'
+		
+		if label.lower() == 'water_buffalo':
+			label = 'buffalo'
+
 		data = { label : True }
 
 		return super().nextAnalyser(ogimage, data)
