@@ -1,0 +1,8 @@
+Giraffe
+Elephant
+Zebra
+Warthog
+Antelope 
+Ostrich
+Bird
+Buffalo
