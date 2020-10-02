@@ -1,5 +1,4 @@
 import threading
-import cv2
 import json
 import base64
 from NotificationRegistry import SensorNotify

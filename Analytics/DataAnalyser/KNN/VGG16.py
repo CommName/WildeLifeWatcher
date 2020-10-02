@@ -49,7 +49,7 @@ class VGG16imagenetKNN (DataAnalyser.DataAnalyser):
 		if label.lower() == 'water_buffalo':
 			label = 'buffalo'
 
-		data = { label : True }
+		data = { label : 1 }
 
 		return super().nextAnalyser(ogimage, data)
 

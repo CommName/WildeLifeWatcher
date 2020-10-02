@@ -7,3 +7,4 @@ cherrypy
 requests
 pymongo
 imutils
+boto3
