@@ -36,6 +36,7 @@ class AWSanalyser (DataAnalyser.DataAnalyser):
         labels = response['Labels']
     
         data = {}
+        foundSomething = False
         for label in labels:
             if label['Name'] in self.officalAnimals:
 
@@ -43,8 +44,10 @@ class AWSanalyser (DataAnalyser.DataAnalyser):
                     numberOfAnimals = len(label['Instances'])
                     if numberOfAnimals ==0:
                         numberOfAnimals = 1
-
+                    foundSomething = True
                     data[label['Name'].lower()] = numberOfAnimals
-            
-        return super().nextAnalyser(ogimage, data)
+        if foundSomething:
+            return super().nextAnalyser(ogimage, data)
+
+        return None
 
