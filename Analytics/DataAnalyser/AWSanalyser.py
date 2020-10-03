@@ -5,8 +5,9 @@ import cv2
 from botocore.config import Config
 from PIL import Image
 import io
+import os
 
-class AWSanalyser (DataAnalyser):
+class AWSanalyser (DataAnalyser.DataAnalyser):
 
     client = None
     officalAnimals = []
@@ -17,7 +18,9 @@ class AWSanalyser (DataAnalyser):
 
 
         self.officalAnimals = []
-        with open('animals.txt') as afile:
+        animalFilePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ))) + '/AWSanimals.txt'
+
+        with open(animalFilePath) as afile:
             for animalName in afile:
                 self.officalAnimals.append(animalName.strip())
 
@@ -27,9 +30,9 @@ class AWSanalyser (DataAnalyser):
         stream = io.BytesIO()
         pil_img.save(stream, format='JPEG')
         bin_img = stream.getvalue()
-
+        print("[INFO] Seting to AWS")
         response = self.client.detect_labels(Image={"Bytes": bin_img })
-
+        print("RECIVED RESPONSE")
         labels = response['Labels']
     
         data = {}
