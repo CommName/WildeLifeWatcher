@@ -5,10 +5,18 @@ FROM python:3.8
 ADD . /app
 COPY requirements.txt /tmp/
 
+
+#Opencv hotfix
+RUN apt-get update -y
+RUN apt install libgl1-mesa-glx -y
+RUN apt-get install 'ffmpeg'\
+    'libsm6'\
+    'libxext6'  -y
+
 #Install any needed packaged specifed in .\requirements.txt
 RUN pip install --trusted-host pypip.python.org  -r /tmp/requirements.txt
-
-#Ports
+RUN pip install Pillow
+RUN pip3 install Pillow
 
 #Environemnt variable
 ENV NATSaddress=nats://demo.nats.io:4222
