@@ -19,7 +19,7 @@ def getAnalyser(args):
             for row in spamreader:
                 accessKey = row["Access key ID"]
                 secretKey = row["Secret access key"]
-            analyser = AWSanalyser.AWSanalyser(accessKey,secretKey, args["AWSregion"])
+            analyser = AWSanalyser.AWSanalyser(accessKey,secretKey, region_name=args["AWSregion"])
 
 
     eatingAnalyser  = KNNEating.KNNEating(args["EatingModel"])

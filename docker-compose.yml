@@ -47,7 +47,7 @@ services:
             - mongodata
             - nats
             
-    analytics:
+    analyticsvgg:
         build: 
             context: ./Analytics/
             dockerfile: DOCKERFILE
@@ -62,6 +62,27 @@ services:
             - registry
             - mongodata
             - nats
+
+    analyticsaws:
+        build: 
+            context: ./Analytics/
+            dockerfile: DOCKERFILE
+        ports: 
+            - 9021:9021
+        environment:
+            - NATSaddress=nats
+            - DataBaseAddress=mongodata
+            - ServiceRegistry=http://registry:8761/
+            - EatingModel=/app/EatingModel.model
+            - Name=AWSanalyser
+            - TypeOfAnalyser=AWS
+            - InternalPort=9021
+            - DataBaseName=AnalyticsAWS
+        depends_on:
+            - registry
+            - mongodata
+            - nats
+
     web:
         build: 
             context: ./GatewayServis/
@@ -78,7 +99,8 @@ services:
             - sensor1
             - sensor2
             - data
-            - analytics
+            - analyticsvgg
+            - analyticsaws
             
     command:
         build:

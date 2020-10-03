@@ -24,11 +24,13 @@ ENV communicator=NATS
 ENV DataBaseAddress=mongodb://localhost:27017
 ENV DataBaseType=Mongo
 ENV InternalPort=9020
-ENV Name=Data1
+ENV Name=VGG16Analytics
+ENV TypeOfAnalyser=VGG16
 ENV ServiceRegistry=http://127.0.0.1:8761/
 ENV EatingModel=EatingModel.model
+ENV DataBaseName=AnalyticsVGG16
 
 
 #Run app when the container launches
 
-CMD python /app/main.py -em $EatingModel -c $communicator -ns $NATSaddress -p $InternalPort -n $Name -d $DataBaseAddress -r $ServiceRegistry -db $DataBaseType
+CMD python /app/main.py -dbn $DataBaseName -a $TypeOfAnalyser -em $EatingModel -c $communicator -ns $NATSaddress -p $InternalPort -n $Name -d $DataBaseAddress -r $ServiceRegistry -db $DataBaseType

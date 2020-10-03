@@ -4,5 +4,6 @@ from StorageSystem import Storage
 def getStorage(args):
     db = None
     if(args["DataBase"]=="Mongo"):
-        db = MongoStorage.MongoStorage(args["DataBaseAddress"])
+        print(args["DataBaseName"])
+        db = MongoStorage.MongoStorage(args["DataBaseAddress"], tableName=args["DataBaseName"])
     return db
