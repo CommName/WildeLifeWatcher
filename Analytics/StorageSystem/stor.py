@@ -5,5 +5,5 @@ def getStorage(args):
     db = None
     if(args["DataBase"]=="Mongo"):
         print(args["DataBaseName"])
-        db = MongoStorage.MongoStorage(args["DataBaseAddress"], tableName=args["DataBaseName"])
+        db = MongoStorage.MongoStorage(args["DataBaseAddress"], dataBaseName=args["DataBaseName"])
     return db
