@@ -76,18 +76,18 @@ ap = argparse.ArgumentParser()
 ap.add_argument('-d', '--DataBaseAddress', default="mongodb://localhost:27017", required=False, help='Address to DataBase server')
 ap.add_argument('-ns', '--NATSaddress', default="nats://localhost:4222", required=False, help='Address to NATS server')
 ap.add_argument('-db', '--DataBase', default="Mongo", required=False, help='Type of DataBase to be used')
+ap.add_argument('-dbn', '--DataBaseName', default="AnalyticsVGG16", required=False, help='Type of DataBase to be used')
 ap.add_argument('-c', '--communicator', default="NATS", required=False, help='Type of Communciator to be used')
 ap.add_argument('-p', '--port', default="9020", required=False, help='Port on which API runs')
 ap.add_argument('-a', '--analyser', default="VGG16", required=False, help='Analyzing algorthm used')
 ap.add_argument('-n', '--name', default="VGG16Analytics", required=False, help='Name of service')
 ap.add_argument('-em', '--EatingModel', default="EatingModel.model", required=False, help='Name of service')
 ap.add_argument('-r', "--serviceRegistryAddress", required=False, default="http://127.0.0.1:8761/", help="Service registry address")
-
+ap.add_argument('-awsr', "--AWSregion", required=False, default="us-east-2", help="AWS server region")
 
 
 args = vars(ap.parse_args())
 args["port"] = int(args["port"])
-
 
 #connection loop
 logic = Logic()

@@ -6,9 +6,9 @@ class MongoStorage(Storage.Storage):
     imageNameDB = None
     table = None;
 
-    def __init__(self,addressURI='mongodb://localhost:27017', dataBaseName="Analytics", tableName='AnalyticsData'):
+    def __init__(self,addressURI='mongodb://localhost:27017', dataBaseName="AnalyticsVGG16", tableName='AnalyticsData'):
         self.client = MongoClient(addressURI)
-        self.imageNameDB = self.client["Analytics"]
+        self.imageNameDB = self.client[dataBaseName]
         self.table = self.imageNameDB.AnalyticsData
 
 
@@ -30,7 +30,7 @@ class MongoStorage(Storage.Storage):
 
         }
         if animalName is not None:
-            query[animalName] = True
+            query[animalName] = { "$gt" : 0}
 
         if feeding is not None:
             query["Eating"] = feeding

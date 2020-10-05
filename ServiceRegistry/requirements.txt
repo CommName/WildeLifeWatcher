@@ -1,2 +1,3 @@
 asyncio-nats-client
 cherrypy
+opencv-contrib-python

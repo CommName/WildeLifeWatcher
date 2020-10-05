@@ -5,9 +5,12 @@ hartebeest
 zebra
 bison
 ox
-water_buffalo
 ice_bear
 impala
 tusker
-African_elephant
 coyote
+giraffe
+elephant
+antelope 
+bird
+buffalo

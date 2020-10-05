@@ -5,10 +5,18 @@ FROM python:3.8
 ADD . /app
 COPY requirements.txt /tmp/
 
+
+#Opencv hotfix
+RUN apt-get update -y
+RUN apt install libgl1-mesa-glx -y
+RUN apt-get install 'ffmpeg'\
+    'libsm6'\
+    'libxext6'  -y
+
 #Install any needed packaged specifed in .\requirements.txt
 RUN pip install --trusted-host pypip.python.org  -r /tmp/requirements.txt
-
-#Ports
+RUN pip install Pillow
+RUN pip3 install Pillow
 
 #Environemnt variable
 ENV NATSaddress=nats://demo.nats.io:4222
@@ -16,11 +24,13 @@ ENV communicator=NATS
 ENV DataBaseAddress=mongodb://localhost:27017
 ENV DataBaseType=Mongo
 ENV InternalPort=9020
-ENV Name=Data1
+ENV Name=VGG16Analytics
+ENV TypeOfAnalyser=VGG16
 ENV ServiceRegistry=http://127.0.0.1:8761/
 ENV EatingModel=EatingModel.model
+ENV DataBaseName=AnalyticsVGG16
 
 
 #Run app when the container launches
 
-CMD python /app/main.py -em $EatingModel -c $communicator -ns $NATSaddress -p $InternalPort -n $Name -d $DataBaseAddress -r $ServiceRegistry -db $DataBaseType
+CMD python /app/main.py -dbn $DataBaseName -a $TypeOfAnalyser -em $EatingModel -c $communicator -ns $NATSaddress -p $InternalPort -n $Name -d $DataBaseAddress -r $ServiceRegistry -db $DataBaseType

@@ -7,3 +7,5 @@ cherrypy
 requests
 pymongo
 imutils
+boto3
+Pillow
