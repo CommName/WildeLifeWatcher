@@ -1,7 +1,6 @@
 # Wildlife watcher
-
+![Pocetna strana](./Images/Home.gif)
 Mikroservis projekat koji uzima sliku sa senzora, cuva je, analizra i salje izvucene informacije korisniku.
-
 Projekat se sastoji iz sledecih mikroservisa:
 | Mikroservis | Opis | Putanja |
 | ------ | ------ | ------ |
@@ -11,6 +10,26 @@ Projekat se sastoji iz sledecih mikroservisa:
 | Gateway servis | Pruza web interfejs kao i otvara API ka unutrasnjim servisima spoljnom korisniku |  [./GatewayServis/]
 | Registry servis | Sluzi za cuvanje aktivnih servisa |  [./ServiceRegistry/]
 | Device servis | Sluzi da simulira citanje podataka sa servisa i izvrsavanje posla aktuatora  |  [./VideoSensors/]
+
+
+# Opis projekta
+Sa pocetne strane mozemo da pristupimo sledećim stranicama:
+  - Live - za uživo posmatranje video kamere
+  - Gallery - za gledanje već postojećih slika i pretraživanje slika sa kamere ili po životinji
+  - Subscribtion - kako bi se podesile notifikacije za određenu životinju.
+
+
+# Live
+![Live stranica](./Images/live.gif)
+Ako posetimo stranicu live, sa leve strane imamo opciju da izaberemo kameru koji želimo da posmatramo, kao i informacije o trenutno aktivnoj kameri. Takođe postoji opcija za postavljanje broja frejmova po sekundi koji kamera šalje.
+
+# Gallery
+![Pretrazivanje slika](./Images/Gallery.gif)
+Stranica galerija sadrži sve slike koje je senzor poslao. Takođe daje mogućnost pretrage slike preko dva kriterijuma: prema senzorima koje ih je generisao i prema životinjama koje su na slici. Pretraga po senzorima se vrši preko data servisa, koji čuva informaciju koja slika je sa kog servisa generisana, a pretraga po životinjama vrši preko analitičkog servisa, koji čuva sve rezultate analize.
+
+# Subscribtion
+![Notifikacije](./Images/Notification.gif)
+Na stranici subscribtion korisnik može da izabere koje notifikacije želi da dobije, tj. da izabere za koje životinje želi da ga sistem obavesti. Kada se na senzoru pojavi izabrana životinja korisnik u gornjem desnom uglu dobije notifikaciju kao i mogućnost da klikne na nju kako bi video sliku i detalje o njoj.
 
 # Pokretanje projekta
 
