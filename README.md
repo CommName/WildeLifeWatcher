@@ -31,6 +31,17 @@ Stranica galerija sadrži sve slike koje je senzor poslao. Takođe daje mogućno
 ![Notifikacije](./Images/Notification.gif)  
 Na stranici subscribtion korisnik može da izabere koje notifikacije želi da dobije, tj. da izabere za koje životinje želi da ga sistem obavesti. Kada se na senzoru pojavi izabrana životinja korisnik u gornjem desnom uglu dobije notifikaciju kao i mogućnost da klikne na nju kako bi video sliku i detalje o njoj.
 
+# Funkcionalni zahtevi
+![Use case diagram](./Images/UseCaseDiagram.jpg)
+Na slici su prikazani najbitniji slučajevi korišćenja. U wildlife watcheru arhitekturno značajni slučajevi korišćenja su:
+  - Očitavanje slike sa senzora - U cilju demonstracije softvera neće se koristiti pravi senzori, potrebno je razviti aplikaciju koja će da oponaša rad senzora.
+  - Uživo posmatranje senzora - Korisnik treba da ima mogućnost da vidi aktivne senzore, kao i da može da posmatra senzor uživo. 
+  - Skladištenje slika - Slike koje se očitavaju sa senzora je potrebno skladištiti zajedno sa informacijama sa kog senzora su snimljene.
+  - Analiza slika - Slike koje su snimljene sa senzora potrebno je analizirati i prikupiti informacije o tome koje se životinje nalaze na slici i njihove atribute.
+  - Pretraživanje postojećih slika po različitim kriterijumima - Korisnik treba da ima mogućnost da pretraži podatke na osnovu senzora koji je zabeležio sliku kao i na osnovu životinja koje se nalaze na slici.
+  - Aktivacija aktuatora - Kada se na slici detektuje životinja potrebno je da se aktivira odgovarajući aktuator. Pošto se radi o simulaciji pravog sistema aktivacija odgovarajuće komande biće simulirano jednostavnom komandom štampanja.
+  - Notifikacija korisnika - Korisnik ima mogućnost da izabere životinje za koje želi da bude obavešten. Kada se životinja pojavi na određenom senzoru potrebno je da korisnik dobije notifikaciju.
+
 # Pokretanje projekta
 
 Za pokretanje projekta potrebno je da se skine [dataset](https://gist.github.com/alexbfree/d0e5ac821e7b57a005c7d9a0cf9edae1) pod nazivom dataset.csv i smesti u folder Device servisa. Takodje potrebno je skinuti [model](https://drive.google.com/file/d/1IqRQVHrxdFajAphioCT6OqtCZ1Ykhtwg/view?usp=sharing) za detekciju da li zivotinaj jede ili ne i smestiti ga u folder za  analytics servis. Nakon toga u glavnom programu potebno je buildovati docker compose i pokrenti ga sledecim kkomandama:
