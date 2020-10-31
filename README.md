@@ -55,13 +55,13 @@ U projektu se koriste sledeci topici:
 Komunikacija između servisa se odvija na dva načina: sinhrono i asinhrono. Na slici iznad je prikazano kako su servisi međusobno povezani. Isprekidanom linijom prikazana je sinhrona komunikacija dok je debelom sivom linijom prikazana asinhrona komunikacija.
 
 Komunikaciju između servisa možemo da objasnimo na primeru obrade slike. Na slici je prikazan komunikacioni dijagram koji opisuje kako se poruke prenose od kako senzor snimi sliku do trenutka kada obaveštenje stigne do korisnika. Prvi korak je da video senzor servis generiše sliku, nakon toga je šalje asinhronu poruku Data servisu preko komunikacionog kanala koji se zove ,,WildLife.Sensor.Data". Data servis pamti sliku kao i atribute sa kog senzora je došla poruka.
-![Komunikacioni dijagram](./Images/Komunikacija servisa.jpg)
+![Komunikacioni dijagram](./Images/Komunikacija%25servisa.jpg)
 Takođe data servis daje jedinstveni naziv slici. Nakon toga šalje sliku analitičkom servisu preko ,,WildLife.Analytics" komunikacionog kanala. Analitički servis primenjuje tehnike mašinskog učenja kako bi utvrdio šta se nalazi na slici. Rezultate analize prvo šalje sinhrono command servisu kako bi command servis aktivirao odgovarajući aktuator. Command service šalje odgovarajuću komandu odgovarajućem aktuatoru. Takođe analitički servis šalje informacije na
 komunikacioni kanal ,,Wildlife.Information" koji osluškuje gateway service kako bi obavestio korisnike kada je uočena njihova omiljena životinja. Detaljnije informacije o ovom procesu moguće je videti na dijagram aktivnosti.  
 ![Dijagram aktivnosti](./Images/ActivityDiagram1.jpg)
 
 # Analytics
-![Class digram](./Images/ActivityDiagram1.jpg)
+![Class digram](./Images/ClassDiagram.jpg)
 Servis za analiziranje slika, koristi pipe-filter strukturu koja klasifikuje da li postoji zivotinja na slici ili ne i koja pomocu VGG16 neuornoske mreze YOLO metodom, ako je pronadjena zivotinja prosledjuje se MobileNetV2 klasifikatoru da doda atribut da li se zivotinja hrani ili ne.
 [API za Analytics](https://web.postman.co/collections/11850883-ce6a572b-2c1a-45e7-bb18-0be52704aea7?version=latest&workspace=7f381795-ce9d-41f0-8cd8-cc0fa0a4d230#85a8b1c3-fe8f-4edf-9293-ea3d2db46b85):
 
