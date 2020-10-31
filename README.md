@@ -55,7 +55,7 @@ U projektu se koriste sledeci topici:
 Komunikacija između servisa se odvija na dva načina: sinhrono i asinhrono. Na slici iznad je prikazano kako su servisi međusobno povezani. Isprekidanom linijom prikazana je sinhrona komunikacija dok je debelom sivom linijom prikazana asinhrona komunikacija.
 
 Komunikaciju između servisa možemo da objasnimo na primeru obrade slike. Na slici je prikazan komunikacioni dijagram koji opisuje kako se poruke prenose od kako senzor snimi sliku do trenutka kada obaveštenje stigne do korisnika. Prvi korak je da video senzor servis generiše sliku, nakon toga je šalje asinhronu poruku Data servisu preko komunikacionog kanala koji se zove ,,WildLife.Sensor.Data". Data servis pamti sliku kao i atribute sa kog senzora je došla poruka.
-![Komunikacioni dijagram](./Images/Komunikacija%25servisa.jpg)
+![Komunikacioni dijagram](./Images/Komunikacijaservisa.jpg)
 Takođe data servis daje jedinstveni naziv slici. Nakon toga šalje sliku analitičkom servisu preko ,,WildLife.Analytics" komunikacionog kanala. Analitički servis primenjuje tehnike mašinskog učenja kako bi utvrdio šta se nalazi na slici. Rezultate analize prvo šalje sinhrono command servisu kako bi command servis aktivirao odgovarajući aktuator. Command service šalje odgovarajuću komandu odgovarajućem aktuatoru. Takođe analitički servis šalje informacije na
 komunikacioni kanal ,,Wildlife.Information" koji osluškuje gateway service kako bi obavestio korisnike kada je uočena njihova omiljena životinja. Detaljnije informacije o ovom procesu moguće je videti na dijagram aktivnosti.  
 ![Dijagram aktivnosti](./Images/ActivityDiagram1.jpg)
